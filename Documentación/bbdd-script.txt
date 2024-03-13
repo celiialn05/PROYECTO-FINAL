@@ -1,0 +1,43 @@
+-- Crear tabla USERS
+CREATE TABLE USERS (
+    DNI VARCHAR(20) PRIMARY KEY,
+    Contraseña VARCHAR(100)
+);
+
+-- Crear tabla PEOPLE
+CREATE TABLE PEOPLE (
+    DNI VARCHAR(20) PRIMARY KEY,
+    Nombre VARCHAR(50),
+    Apellido1 VARCHAR(50),
+    Apellido2 VARCHAR(50),
+    Imagen BLOB,
+    Correo_electronico VARCHAR(100),
+    Edad INT,
+    FOREIGN KEY (DNI) REFERENCES USERS(DNI)
+);
+
+-- Crear tabla CATEGORIES
+CREATE TABLE CATEGORIES (
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    Nombre VARCHAR(100)
+);
+
+-- Crear tabla FINANCES
+CREATE TABLE FINANCES (
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    DNI VARCHAR(20),
+    Fecha TIMESTAMP,
+    Descripción VARCHAR(255),
+    Monto DECIMAL(10, 2),
+    FOREIGN KEY (DNI) REFERENCES PEOPLE(DNI)
+);
+
+-- Crear tabla FINANCE_CATEGORIES (relación muchos a muchos)
+CREATE TABLE FINANCE_CATEGORIES (
+    ID_Finanza INT,
+    ID_Categoria INT,
+    FOREIGN KEY (ID_Finanza) REFERENCES FINANCES(ID),
+    FOREIGN KEY (ID_Categoria) REFERENCES CATEGORIES(ID),
+    PRIMARY KEY (ID_Finanza, ID_Categoria)
+);
+
