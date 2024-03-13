@@ -45,5 +45,11 @@
       <horasSemanales>5</horasSemanales>
       <ciclo>ASIR</ciclo>
     </modulo>
+    <modulo id="0374">
+      <nombre>Implantación de aplicaciones web</nombre>
+      <curso>2</curso>
+      <horasSemanales>5</horasSemanales>
+      <ciclo>ASIR</ciclo>
+    </modulo>
   </modulos>
 </ies>
