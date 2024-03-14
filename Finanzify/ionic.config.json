@@ -1,0 +1,7 @@
+{
+  "name": "Finanzify",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

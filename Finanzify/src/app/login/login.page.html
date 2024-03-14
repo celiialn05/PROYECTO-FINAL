@@ -1,0 +1,52 @@
+<!-- Header que realmente no se usa, pero lo dejo por si acaso
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+-->
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" class="ion-text-end">
+        <ion-content class="ion-padding">
+          <ion-fab slot="fixed" vertical="top" horizontal="start">
+            <ion-fab-button class="custom-orange">
+              <ion-icon name="color-palette-outline"></ion-icon>
+            </ion-fab-button>
+            <ion-fab-list side="end">
+              <ion-fab-button>
+                <ion-icon name="moon"></ion-icon>
+              </ion-fab-button>
+              <ion-fab-button>
+                <ion-icon name="sunny-outline"></ion-icon>
+              </ion-fab-button>
+            
+            </ion-fab-list>
+          </ion-fab>
+        </ion-content>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <img src="assets/logo-prototipo.png" alt="Logo de la aplicación" >
+      </ion-col>
+    </ion-row>
+    
+
+    <ion-row>
+      <ion-col size="12" class="ion-text-center">
+       
+        <ion-button [routerLink]="['/crear-cuenta']" shape="round">Registrarse</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar class="footer-toolbar">
+    App creada por: Celia Lloret Nicolás
+  </ion-toolbar>
+</ion-footer>
+
