@@ -16,29 +16,69 @@
               <ion-icon name="color-palette-outline"></ion-icon>
             </ion-fab-button>
             <ion-fab-list side="end">
-              <ion-fab-button>
+              <ion-fab-button (click)="toggleDarkMode(true)">
                 <ion-icon name="moon"></ion-icon>
               </ion-fab-button>
-              <ion-fab-button>
+
+              <ion-fab-button (click)="toggleDarkMode(false)">
                 <ion-icon name="sunny-outline"></ion-icon>
               </ion-fab-button>
-            
             </ion-fab-list>
           </ion-fab>
         </ion-content>
       </ion-col>
     </ion-row>
+    
     <ion-row>
       <ion-col size="12" class="ion-text-center">
         <img src="assets/logo-prototipo.png" alt="Logo de la aplicación" >
       </ion-col>
     </ion-row>
-    
 
     <ion-row>
       <ion-col size="12" class="ion-text-center">
+        <h2><strong>Sign in</strong> </h2>
+        <h4>Pon tu DNI y contraseña</h4>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-textarea label="DNI" labelPlacement="floating" fill="outline" placeholder=" Ejem. 12345678A"></ion-textarea>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-textarea label="Contraseña" labelPlacement="floating" fill="outline" placeholder=" Ejem. A1frj!!@btgttgS2"></ion-textarea>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12" class="ion-text-center">
+       <ion-button expand="block" class="custom-black">
+        Entrar
+       </ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <ion-button fill="clear">¿Has olvidado tu contraseña?</ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <ion-item-divider>
+          <ion-label>¿No tienes cuenta?</ion-label>
+        </ion-item-divider>
+      </ion-col>
+    </ion-row>
        
-        <ion-button [routerLink]="['/crear-cuenta']" shape="round">Registrarse</ion-button>
+    <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <ion-button [routerLink]="['/crear-cuenta']" class="custom-orange" expand="block">Nueva cuenta </ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>

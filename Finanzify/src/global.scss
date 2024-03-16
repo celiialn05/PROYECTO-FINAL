@@ -24,3 +24,25 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+
+
+.dark-theme {
+    --ion-background-color: #121212; /* Color de fondo principal */
+    --ion-text-color: #ffffff; /* Color de texto principal */
+    --ion-toolbar-background-color: #1f1f1f; /* Color de fondo de la barra de herramientas */
+    --ion-toolbar-text-color: #ffffff; /* Color de texto de la barra de herramientas */
+    --ion-button-background-color: #343a40; /* Color de fondo de los botones */
+    --ion-button-text-color: #ffffff; /* Color de texto de los botones */
+    /* Agrega más variables CSS personalizadas según sea necesario */
+  }
+
+  .white-theme {
+    --ion-background-color: #ffffff; /* Color de fondo principal */
+    --ion-text-color: #000000; /* Color de texto principal */
+    --ion-toolbar-background-color: #f4f5f8; /* Color de fondo de la barra de herramientas */
+    --ion-toolbar-text-color: #000000; /* Color de texto de la barra de herramientas */
+    --ion-button-background-color: #ff5e00; /* Color de fondo de los botones */
+    --ion-button-text-color: #ffffff; /* Color de texto de los botones */
+    /* Agrega más variables CSS personalizadas según sea necesario */
+  }
+  
