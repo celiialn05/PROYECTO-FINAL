@@ -12,7 +12,7 @@ import { IonButton, IonButtons, IonFab, IonFabButton, IonFabList, IonFooter, Ion
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
-  standalone: true,                                                          //Para Android tendras que añadir estos imports 
+  standalone: true,                                                          //Para Android tendras que añadir estos imports (comando para hacer build: ionic capacitor build android )
   imports: [IonicModule, CommonModule, FormsModule, RouterModule,RouterLink],//,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList
 })
 export class LoginPage implements OnInit {
