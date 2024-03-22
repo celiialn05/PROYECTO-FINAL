@@ -11,13 +11,13 @@ export class ThemeService {
 
   // Método público para activar el modo oscuro
   enableDarkMode() {
-    this.document.body.classList.add('dark-theme'); // Agrega una clase CSS para activar el modo oscuro
-    this.document.body.classList.remove('white-theme');  // Agrega una clase CSS para activar el modo oscuro
+    this.document.documentElement.classList.add('dark-theme');
+    this.document.documentElement.classList.remove('light-theme');
   }
 
   // Método público para desactivar el modo oscuro
   disableDarkMode() {
-    this.document.body.classList.add('white-theme'); // Agrega una clase CSS para activar el tema claro
-    this.document.body.classList.remove('dark-theme');
+    this.document.documentElement.classList.remove('dark-theme');
+    this.document.documentElement.classList.add('light-theme');
   }
 }
