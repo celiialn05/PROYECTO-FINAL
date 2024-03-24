@@ -14,10 +14,6 @@
   .custom-black {
     --background: #000000; 
   }
-  .ion-thumbnail {
-    --size: 140px;
-    --border-radius: 14px;
-  }
   .custom-text-center {
     text-align: center;
   }
@@ -26,3 +22,24 @@
     justify-content: center;
     align-items: center;
   }
+  .custom-thumbnail-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    --border-radius: 50px;
+
+  }
+
+  .custom-size {
+    width: 80%;
+   
+  }
+  ion-menu::part(backdrop) {
+    background-color: rgba(255, 166, 0, 0.5);
+  }
+  
+  ion-menu::part(container) {
+    border-radius: 0 20px 20px 0;
+    box-shadow: 4px 0px 16px rgba(255, 119, 0, 0.18);
+  }
+  
