@@ -5,15 +5,17 @@ import { IonContent, IonicModule } from '@ionic/angular';
 import { RouterLink, RouterModule } from '@angular/router';
 import { moon, sunnyOutline } from 'ionicons/icons';
 import { ThemeService } from '../services/theme.service';
-import { IonButton, IonButtons, IonFab, IonFabButton, IonFabList, IonFooter, IonHeader, IonItemDivider, IonTextarea } from '@ionic/angular/standalone';
+import { IonButton, IonButtons, IonCol, IonFab, IonFabButton, IonFabList, IonFooter, IonGrid, IonHeader, IonItemDivider, IonRow, IonTextarea } from '@ionic/angular/standalone';
 
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
-  standalone: true,                                                          //Para Android tendras que añadir estos imports (comando para hacer build: ionic capacitor build android )
-  imports: [IonicModule, CommonModule, FormsModule, RouterModule,RouterLink],//,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList
+  standalone: true, 
+  imports: [IonicModule, CommonModule, FormsModule, RouterModule,RouterLink]
+                                                          //Para Android tendras que añadir estos imports (comando para hacer build: ionic capacitor build android )
+  //imports: [IonicModule, CommonModule, FormsModule, RouterModule,RouterLink,IonGrid,IonCol,IonRow,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList],//,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList
 })
 export class LoginPage implements OnInit {
   constructor(private themeService: ThemeService) {} 
