@@ -1,24 +1,126 @@
-
 <ion-header>
   <ion-toolbar>
-    <ion-title>Dashboard</ion-title>
+    <ion-title>Contabilidad</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Dashboard</ion-title>
+      <ion-title size="large">Contabilidad</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <!-- Contenido de la página de Dashboard -->
   <ion-card>
     <ion-card-header>
-      <ion-card-title>¡Hola!</ion-card-title>
+      <h2 style="font-size: 24px; color: orange; font-weight: bold;">Controla tus ahorros, toma el control de tu vida.</h2>
     </ion-card-header>
     <ion-card-content>
-      <p>contabilidad.</p>
+      <!-- Botones desplegables para diferentes categorías -->
+      <ion-item lines="none">
+        <ion-label>Selecciona una categoría</ion-label>
+        <ion-select interface="action-sheet">
+          <ion-select-option value="ahorros">
+            <ion-icon slot="start" name="wallet-outline"></ion-icon>
+            Ahorros
+          </ion-select-option>
+          <ion-select-option value="salario">
+            <ion-icon slot="start" name="cash-outline"></ion-icon>
+            Salario Mensual
+          </ion-select-option>
+          <ion-select-option value="ocio">
+            <ion-icon slot="start" name="game-controller-outline"></ion-icon>
+            Ocio
+          </ion-select-option>
+          <ion-select-option value="salud">
+            <ion-icon slot="start" name="medkit-outline"></ion-icon>
+            Salud
+          </ion-select-option>
+          <ion-select-option value="facturas">
+            <ion-icon slot="start" name="document-text-outline"></ion-icon>
+            Facturas
+          </ion-select-option>
+          <ion-select-option value="plataformas_online">
+            <ion-icon slot="start" name="desktop-outline"></ion-icon>
+            Plataformas Online
+          </ion-select-option>
+          <ion-select-option value="imprevistos">
+            <ion-icon slot="start" name="warning-outline"></ion-icon>
+            Imprevistos
+          </ion-select-option>
+          <ion-select-option value="otros">
+            <ion-icon slot="start" name="ellipsis-horizontal-outline"></ion-icon>
+            Otros
+          </ion-select-option>
+          <!-- Agrega más opciones según tus necesidades -->
+        </ion-select>
+      </ion-item>
+
+      <!-- Campos para ingresar cantidades -->
+      <ion-item>
+        <ion-label position="stacked">Cantidad</ion-label>
+        <ion-input type="text" inputmode="numeric" placeholder="Ingrese la cantidad"></ion-input>
+
+      </ion-item>
+
+      <!-- Botón para confirmar el ingreso -->
+      <ion-button expand="block" color="primary">Guardar</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Lista de categorías y cantidades -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Categorías y Montos</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-icon slot="start" name="wallet-outline"></ion-icon>
+          <ion-label>Ahorros</ion-label>
+          <ion-badge slot="end">1000€</ion-badge>
+        </ion-item>
+        <ion-item>
+          <ion-icon slot="start" name="cash-outline"></ion-icon>
+          <ion-label>Salario Mensual</ion-label>
+          <ion-badge slot="end">2000€</ion-badge>
+        </ion-item>
+        <ion-item>
+          <ion-label>Ocio</ion-label>
+          <ion-icon slot="start" name="game-controller-outline"></ion-icon>
+          <ion-badge slot="end">500€</ion-badge>
+        </ion-item>
+        <ion-item>
+          <ion-label>Salud</ion-label>
+          <ion-icon slot="start" name="medkit-outline"></ion-icon>
+          <ion-badge slot="end">300€</ion-badge>
+        </ion-item>
+        <ion-item>
+          <ion-label>Facturas</ion-label>
+          <ion-icon slot="start" name="document-text-outline"></ion-icon>
+          <ion-badge slot="end">500€</ion-badge>
+        </ion-item>
+        
+        <ion-item>
+          <ion-label>Plataformas Online</ion-label>
+          <ion-icon slot="start" name="desktop-outline"></ion-icon>
+          <ion-badge slot="end">200€</ion-badge>
+        </ion-item>
+        
+        <ion-item>
+          <ion-label>Imprevistos</ion-label>
+          <ion-icon slot="start" name="warning-outline"></ion-icon>
+          <ion-badge slot="end">100€</ion-badge>
+        </ion-item>
+        <ion-item>
+          <ion-label>Otros</ion-label>
+          <ion-icon slot="start" name="ellipsis-horizontal-outline"></ion-icon>
+          <ion-badge slot="end">150€</ion-badge>
+        </ion-item>
+        
+        <!-- Agrega más elementos según tus necesidades -->
+      </ion-list>
     </ion-card-content>
   </ion-card>
 </ion-content>

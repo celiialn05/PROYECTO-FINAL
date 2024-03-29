@@ -16,8 +16,8 @@ import { IonButton, IonButtons, IonContent, IonFooter, IonHeader, IonTitle, IonT
   templateUrl: './crear-cuenta.page.html',
   styleUrls: ['./crear-cuenta.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
-  //imports: [IonicModule, CommonModule, FormsModule,IonItem,IonLabel,IonInput,IonGrid,IonCol,IonRow,IonThumbnail,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList,IonToolbar,IonTitle,IonContent,IonCard,IonCardHeader,IonCardTitle]
+  //imports: [IonicModule, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule,IonItem,IonLabel,IonInput,IonGrid,IonCol,IonRow,IonThumbnail,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList,IonToolbar,IonTitle,IonContent,IonCard,IonCardHeader,IonCardTitle]
 
 })
 export class CrearCuentaPage implements OnInit {

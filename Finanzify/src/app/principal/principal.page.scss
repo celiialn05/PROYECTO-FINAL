@@ -42,4 +42,8 @@
     border-radius: 0 20px 20px 0;
     box-shadow: 4px 0px 16px rgba(255, 119, 0, 0.18);
   }
-  
+
+
+ion-icon[slot="icon-only"] {
+  color: orange; /* Cambia esto al color deseado */
+}
