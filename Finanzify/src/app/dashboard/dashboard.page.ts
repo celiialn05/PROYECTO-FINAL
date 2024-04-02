@@ -15,16 +15,37 @@ import { HttpClient } from '@angular/common/http';
 })
 export class DashboardPage implements OnInit {
 pruebas : any = [];
-  constructor(private http:HttpClient ) { }
+nombre: string = '';
+email: string = '';
 
-  ngOnInit() {
+constructor(private http:HttpClient ) { }
+
+ngOnInit() {
+}
+insertarDatos() {
+  // Datos para insertar
+  const datos = {
+    nombre: this.nombre,
+    email: this.email
+    
+  };
+  if (!this.nombre || !this.email) {
+    console.error('Error: Datos de nombre y/o correo no especificados.');
+    return;
   }
 
-  getPrueba(){
-    this.http.get('http://localhost/prueba.php').subscribe((response) => {
-    console.log(response);
-    this.pruebas = response;
-  });
-}
+  const url = 'http://localhost/prueba.php';
+
+    // Realizar la solicitud POST para insertar datos
+    this.http.post(url, datos)
+      .subscribe((respuesta) => {
+        console.log('Inserción exitosa:', respuesta);
+        // Aquí puedes agregar cualquier otra lógica que desees después de la inserción exitosa
+      }, (error) => {
+        console.error('Error al insertar datos:', error);
+        // Aquí puedes manejar el error de manera adecuada
+      });
+  }
+
 
 }

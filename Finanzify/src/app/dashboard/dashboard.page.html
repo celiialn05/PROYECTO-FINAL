@@ -34,19 +34,9 @@
     </ion-card-header>
     <ion-card-content>
       <p>dashboard.</p>
-      <ion-button (click)="getPrueba()">
-        Pruebita
-      </ion-button>
-     
-      
-          <ion-list>
-            <ion-item *ngFor="let prueba of pruebas">
-              <div>
-             {{prueba.nombre}}
-             {{prueba.edad}}
-            </div>
-            </ion-item>  
-          </ion-list>
+      <ion-textarea [(ngModel)]="nombre" placeholder="Nombre"></ion-textarea>
+      <ion-textarea [(ngModel)]="email" placeholder="Correo electrónico"></ion-textarea>
+      <ion-button (click)="insertarDatos()">Insertar Datos</ion-button>
        
      
     </ion-card-content>
