@@ -43,24 +43,35 @@
     </ion-row>
 
     <ion-row>
-      <ion-col size="12">
-        <ion-textarea label="DNI" labelPlacement="floating" fill="outline" placeholder=" Ejem. 12345678A"></ion-textarea>
-        <br>
+      <ion-col size="12" >
+        <ion-item lines="full">
+          <ion-label position="floating">DNI</ion-label>
+          <ion-input type="text" placeholder="Ejem. 12345678A" [(ngModel)]="dni"></ion-input>
+        </ion-item>
       </ion-col>
     </ion-row>
 
     <ion-row>
       <ion-col size="12">
-        <ion-textarea label="Contraseña" labelPlacement="floating" fill="outline" placeholder=" Ejem. A1frj!!@btgttgS2"></ion-textarea>
+        <ion-item lines="full">
+          <ion-label position="floating">Contraseña</ion-label>
+          <ion-input type="password" placeholder="Ejem. A1frj!!@btgttgS2" [(ngModel)]="contrasena"></ion-input>
+        </ion-item>
       </ion-col>
     </ion-row>
 
     <ion-row>
       <ion-col size="12" class="custom-button-center">
-        <ion-button class="custom-size custom-black" shape="round" [routerLink]="['/principal']">
+        <ion-button class="custom-size custom-black" shape="round" (click)="entrar()">
         Entrar
        </ion-button>
       </ion-col>
+      <ion-toast
+      [isOpen]="isToastOpen"
+      message="Error en los credenciales"
+      [duration]="3000"
+      (didDismiss)="setOpen(false)"
+    ></ion-toast>
     </ion-row>
 
     <ion-row>

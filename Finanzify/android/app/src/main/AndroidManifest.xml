@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+  <uses-permission android:name="android.permission.INTERNET" />
 
-    <application
+
+  <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+    <meta-data
+      android:name="android.webkit.WebView.EnableSafeBrowsing"
+      android:value="false" />
+    <meta-data
+      android:name="android.os.NetworkOnMainThreadException"
+      android:value="true" />
+    <meta-data
+      android:name="android:usesCleartextTraffic"
+      android:value="true" />
         <activity
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode"
             android:name=".MainActivity"
@@ -32,6 +42,7 @@
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths"></meta-data>
+
         </provider>
     </application>
 

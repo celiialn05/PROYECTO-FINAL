@@ -11,7 +11,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./dashboard.page.scss'],
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule]
-  //imports: [IonicModule, CommonModule, FormsModule,IonGrid,IonCol,IonRow,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList,IonToolbar,IonTitle,IonContent,IonCard,IonCardHeader,IonCardTitle]
+ // imports: [IonicModule, CommonModule, FormsModule,IonGrid,IonCol,IonRow,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList,IonToolbar,IonTitle,IonContent,IonCard,IonCardHeader,IonCardTitle]
 })
 export class DashboardPage implements OnInit {
 pruebas : any = [];
@@ -34,7 +34,7 @@ insertarDatos() {
     return;
   }
 
-  const url = 'http://localhost/prueba.php';
+  const url = 'http://192.168.1.68:80/prueba.php';
 
     // Realizar la solicitud POST para insertar datos
     this.http.post(url, datos)
