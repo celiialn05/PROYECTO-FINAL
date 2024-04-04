@@ -28,6 +28,7 @@
   </ion-header>
 
   <!-- Contenido de la página de Dashboard -->
+  
   <ion-card>
     <ion-card-header>
       <ion-card-title>¡Hola!</ion-card-title>
@@ -37,8 +38,14 @@
       <ion-textarea [(ngModel)]="nombre" placeholder="Nombre"></ion-textarea>
       <ion-textarea [(ngModel)]="email" placeholder="Correo electrónico"></ion-textarea>
       <ion-button (click)="insertarDatos()">Insertar Datos</ion-button>
-      
      
+     
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+      <ion-card-title class="ion-padding-start">Gráfico de barras verticales</ion-card-title>
+    <ion-card-content class="ion-margin-top" [ngClass]="{'cardContent' : below}">
+      <app-vertical-bar-chart [view]="view" [legendPosition]="legendPosition"></app-vertical-bar-chart>
     </ion-card-content>
   </ion-card>
 </ion-content>
