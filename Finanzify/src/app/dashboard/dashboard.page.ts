@@ -19,7 +19,7 @@ export class DashboardPage implements OnInit {
 pruebas : any = [];
 nombre: string = '';
 email: string = '';
-view: any;
+view: any; 
 legendPosition!: LegendPosition;
 below:boolean = false;
 constructor(private http:HttpClient, private platform: Platform ) { }
@@ -28,6 +28,22 @@ ngOnInit() {
   this.changeLegendPosition(false);
   this.handleScreenSizeChange();
 }
+data: any[] = [
+  {
+    "name": "Alimentacion",
+    "value": 8940000
+  },
+  {
+    "name": "veterinario",
+    "value": 5000000
+  },
+  {
+    "name": "Casa",
+    "value": 7200000
+  }
+];
+
+
 @HostListener('window:resize', ['$event'])
 onResize(event: any) {
  this.handleScreenSizeChange();
@@ -61,7 +77,7 @@ insertarDatos() {
     return;
   }
 
-  const url = 'http://192.168.1.68:80/prueba.php';
+  const url = 'http://localhost/prueba.php';
 
     // Realizar la solicitud POST para insertar datos
     this.http.post(url, datos)

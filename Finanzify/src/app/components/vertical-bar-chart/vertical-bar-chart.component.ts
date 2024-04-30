@@ -20,27 +20,20 @@ showYAxisLabel = true;
 yAxisLabel = 'Euros';
 @Input() view: any;
 @Input() legendPosition: any = LegendPosition.Below;
+single: any[] = [];
+@Input('data') set setData(data: any[]) {
+  this.single = data;
+}
+showDataLabel = false;
+
+
 colorScheme: any = {
   domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
 };
-single: any[] = [];
+
   constructor() { }
 
   ngOnInit() {
-    this.single = [
-      {
-        "name": "Germany",
-        "value": 8940000
-      },
-      {
-        "name": "USA",
-        "value": 5000000
-      },
-      {
-        "name": "France",
-        "value": 7200000
-      }
-    ];
   }
   onSelect(event: any ) {
     console.log(event);
