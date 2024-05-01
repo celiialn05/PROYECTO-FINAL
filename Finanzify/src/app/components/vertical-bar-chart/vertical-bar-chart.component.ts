@@ -15,7 +15,7 @@ showYAxis = true;
 gradient = true;
 showLegend = true;
 showXAxisLabel = true;
-xAxisLabel = 'Ejemplo barras verticales';
+xAxisLabel = '';
 showYAxisLabel = true;
 yAxisLabel = 'Euros';
 @Input() view: any;
@@ -24,7 +24,7 @@ single: any[] = [];
 @Input('data') set setData(data: any[]) {
   this.single = data;
 }
-showDataLabel = false;
+// showDataLabel = false;
 
 
 colorScheme: any = {

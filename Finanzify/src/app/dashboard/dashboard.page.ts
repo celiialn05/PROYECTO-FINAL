@@ -6,14 +6,14 @@ import {  IonicModule } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { VerticalBarChartComponent } from '../components/vertical-bar-chart/vertical-bar-chart.component';
 import { LegendPosition } from '@swimlane/ngx-charts';
-
+import {IonRefresher, IonRefresherContent } from '@ionic/angular/standalone';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule,VerticalBarChartComponent,NgClass]
-  //imports: [IonicModule, CommonModule, FormsModule,VerticalBarChartComponent,NgClass,IonGrid,IonCol,IonRow,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList,IonToolbar,IonTitle,IonContent,IonCard,IonCardHeader,IonCardTitle]
+  //imports: [IonicModule, CommonModule, FormsModule,VerticalBarChartComponent,NgClass,IonGrid,IonCol,IonRow,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList,IonToolbar,IonTitle,IonContent,IonCard,IonCardHeader,IonCardTitle,IonRefresher,IonRefresherContent]
 })
 export class DashboardPage implements OnInit {
 pruebas : any = [];
@@ -22,26 +22,55 @@ email: string = '';
 view: any; 
 legendPosition!: LegendPosition;
 below:boolean = false;
+data: any[] = [
+  {
+    "name": "Alimentacion",
+    "value": Math.floor(Math.random() * (10000000 - 1000000 + 1)) + 1000000
+  },
+  {
+    "name": "veterinario",
+    "value": Math.floor(Math.random() * (10000000 - 1000000 + 1)) + 1000000
+  },
+  {
+    "name": "Casa",
+    "value": Math.floor(Math.random() * (10000000 - 1000000 + 1)) + 1000000
+  }
+];
 constructor(private http:HttpClient, private platform: Platform ) { }
 
 ngOnInit() {
   this.changeLegendPosition(false);
   this.handleScreenSizeChange();
+ 
 }
-data: any[] = [
-  {
-    "name": "Alimentacion",
-    "value": 8940000
-  },
-  {
-    "name": "veterinario",
-    "value": 5000000
-  },
-  {
-    "name": "Casa",
-    "value": 7200000
-  }
-];
+handleRefresh(event: any) {
+  // Lógica para actualizar los datos aquí
+  this.generateRandomData();
+
+  // Simular una demora de 1 segundo para el efecto visual
+  setTimeout(() => {
+    // Finalizar el refresco
+    event.target.complete();
+  }, 1000);
+}
+
+generateRandomData() {
+  // Generar los números aleatorios para actualizar los datos
+  this.data = [
+    {
+      "name": "Alimentacion",
+      "value": Math.floor(Math.random() * (10000000 - 1000000 + 1)) + 1000000
+    },
+    {
+      "name": "veterinario",
+      "value": Math.floor(Math.random() * (10000000 - 1000000 + 1)) + 1000000
+    },
+    {
+      "name": "Casa",
+      "value": Math.floor(Math.random() * (10000000 - 1000000 + 1)) + 1000000
+    }
+  ];
+}
 
 
 @HostListener('window:resize', ['$event'])
