@@ -1,27 +1,30 @@
 import { Component, Host, HostListener, OnInit } from '@angular/core';
 import { CommonModule, NgClass } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonButton, IonButtons, IonContent, IonFooter, IonHeader, IonTitle, IonToolbar,IonFabButton, IonItemDivider,IonTextarea,IonFab,IonFabList, IonCard, IonCardHeader, IonCardTitle, IonGrid, IonCol, IonRow, Platform } from '@ionic/angular/standalone';
+import { IonButton, IonButtons, IonContent, IonFooter, IonHeader, IonTitle, IonToolbar,IonFabButton, IonItemDivider,IonTextarea,IonFab,IonFabList, IonCard, IonCardHeader, IonCardTitle, IonGrid, IonCol, IonRow, Platform, IonicSlides } from '@ionic/angular/standalone';
 import {  IonicModule } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { VerticalBarChartComponent } from '../components/vertical-bar-chart/vertical-bar-chart.component';
+import { PieGridComponent } from '../components/pie-grid/pie-grid.component';
 import { LegendPosition } from '@swimlane/ngx-charts';
 import {IonRefresher, IonRefresherContent } from '@ionic/angular/standalone';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule,VerticalBarChartComponent,NgClass]
-  //imports: [IonicModule, CommonModule, FormsModule,VerticalBarChartComponent,NgClass,IonGrid,IonCol,IonRow,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList,IonToolbar,IonTitle,IonContent,IonCard,IonCardHeader,IonCardTitle,IonRefresher,IonRefresherContent]
+  imports: [IonicModule, CommonModule, FormsModule,VerticalBarChartComponent,NgClass,PieGridComponent]
+  //imports: [IonicModule, CommonModule, FormsModule,VerticalBarChartComponent,NgClass,IonGrid,IonCol,IonRow,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList,IonToolbar,IonTitle,IonContent,IonCard,IonCardHeader,IonCardTitle,IonRefresher,IonRefresherContent,PieGridComponent]
 })
 export class DashboardPage implements OnInit {
-pruebas : any = [];
-nombre: string = '';
-email: string = '';
-view: any; 
-legendPosition!: LegendPosition;
-below:boolean = false;
+ 
+  pruebas : any = [];
+  nombre: string = '';
+  email: string = '';
+  view: any; 
+  legendPosition!: LegendPosition;
+  below:boolean = false;
 data: any[] = [
   {
     "name": "Alimentacion",
@@ -36,6 +39,7 @@ data: any[] = [
     "value": Math.floor(Math.random() * (10000000 - 1000000 + 1)) + 1000000
   }
 ];
+
 constructor(private http:HttpClient, private platform: Platform ) { }
 
 ngOnInit() {
