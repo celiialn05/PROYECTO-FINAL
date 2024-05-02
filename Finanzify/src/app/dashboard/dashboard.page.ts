@@ -8,13 +8,17 @@ import { VerticalBarChartComponent } from '../components/vertical-bar-chart/vert
 import { PieGridComponent } from '../components/pie-grid/pie-grid.component';
 import { LegendPosition } from '@swimlane/ngx-charts';
 import {IonRefresher, IonRefresherContent } from '@ionic/angular/standalone';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
+
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule,VerticalBarChartComponent,NgClass,PieGridComponent]
+  imports: [IonicModule, CommonModule, FormsModule,VerticalBarChartComponent,NgClass,PieGridComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   //imports: [IonicModule, CommonModule, FormsModule,VerticalBarChartComponent,NgClass,IonGrid,IonCol,IonRow,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList,IonToolbar,IonTitle,IonContent,IonCard,IonCardHeader,IonCardTitle,IonRefresher,IonRefresherContent,PieGridComponent]
 })
 export class DashboardPage implements OnInit {
