@@ -11,9 +11,9 @@ import { LegendPosition, NgxChartsModule } from '@swimlane/ngx-charts';
 export class VerticalBarChartComponent  implements OnInit {
 // options
 showXAxis = true;
-showYAxis = true;
+showYAxis = false;
 gradient = true;
-showLegend = true;
+showLegend = false;
 showXAxisLabel = true;
 xAxisLabel = '';
 showYAxisLabel = true;

@@ -12,6 +12,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 
 
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
@@ -41,7 +42,61 @@ data: any[] = [
   {
     "name": "Casa",
     "value": Math.floor(Math.random() * (10000000 - 1000000 + 1)) + 1000000
-  }
+  },
+  {
+    "name": "Transporte",
+    "value": Math.floor(Math.random() * (10000000 - 1000000 + 1)) + 1000000
+},
+{
+  "name": "Entretenimiento",
+  "value": Math.floor(Math.random() * (10000000 - 1000000 + 1)) + 1000000
+},
+{
+  "name": "Salud",
+  "value": Math.floor(Math.random() * (10000000 - 1000000 + 1)) + 1000000
+},
+{
+  "name": "Educación",
+  "value": Math.floor(Math.random() * (10000000 - 1000000 + 1)) + 1000000
+},
+{
+  "name": "Ropa",
+  "value": Math.floor(Math.random() * (10000000 - 1000000 + 1)) + 1000000
+},
+{
+  "name": "Tecnología",
+  "value": Math.floor(Math.random() * (10000000 - 1000000 + 1)) + 1000000
+},
+{
+  "name": "Viajes",
+  "value": Math.floor(Math.random() * (10000000 - 1000000 + 1)) + 1000000
+},
+{
+  "name": "Seguros",
+  "value": Math.floor(Math.random() * (10000000 - 1000000 + 1)) + 1000000
+},
+{
+  "name": "Impuestos",
+  "value": Math.floor(Math.random() * (10000000 - 1000000 + 1)) + 1000000
+},
+{
+  "name": "Regalos",
+  "value": Math.floor(Math.random() * (10000000 - 1000000 + 1)) + 1000000
+},
+{
+  "name": "Deudas",
+  "value": Math.floor(Math.random() * (10000000 - 1000000 + 1)) + 1000000
+},
+{
+  "name": "Inversiones",
+  "value": Math.floor(Math.random() * (10000000 - 1000000 + 1)) + 1000000
+},
+{
+  "name": "Otros",
+  "value": Math.floor(Math.random() * (10000000 - 1000000 + 1)) + 1000000
+}
+
+
 ];
 
 constructor(private http:HttpClient, private platform: Platform ) { }
