@@ -11,3 +11,16 @@ ion-card {
     }
 
 }
+.titulos-cards {
+    text-align: center; /* Centra el texto horizontalmente */
+    font-size: 2em; /* Tamaño de fuente en em */
+    font-weight: bold; /* Texto en negrita */
+    color: orange; /* Color naranja */
+}
+
+/* Tamaño de fuente específico para dispositivos móviles */
+@media (max-width: 768px) {
+    .titulos-cards {
+        font-size: 1.5em; /* Tamaño de fuente más pequeño para dispositivos móviles */
+    }
+}

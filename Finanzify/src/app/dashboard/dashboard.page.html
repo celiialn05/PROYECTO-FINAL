@@ -46,26 +46,29 @@
         <ion-button (click)="insertarDatos()">Insertar Datos</ion-button>
       </ion-card-content>
     </ion-card>   IMPORTANTE SWIPER npm install swiper@latest-->
-   
-    <swiper-container>
-      <swiper-slide> 
-            <ion-card>
-                  <ion-card-title class="ion-padding-start">Gráfico de pie gid</ion-card-title>
-                <ion-card-content class="ion-margin-top" [ngClass]="{'cardContent' : below}">
-                  <app-pie-grid [data]="data" [legendPosition]="legendPosition" ></app-pie-grid>
-                </ion-card-content>
-             </ion-card>
-    </swiper-slide>
-      <swiper-slide> 
-          <ion-card> 
-              <ion-card-title class="ion-padding-start">Gráfico de barras verticales</ion-card-title>
-                <ion-card-content class="ion-margin-top" [ngClass]="{'cardContent' : below}">
-                   <app-vertical-bar-chart [view]="view" [legendPosition]="legendPosition"[data]="data" ></app-vertical-bar-chart>
-                 </ion-card-content>
-         </ion-card>
+   <ion-card>
+     <h1 class="titulos-cards">Estadísticas del mes </h1>
+      <swiper-container>
+        <swiper-slide> 
+              <ion-card>
+                    <ion-card-title class="ion-padding-start">Gráfico de pie gid</ion-card-title>
+                  <ion-card-content class="ion-margin-top" [ngClass]="{'cardContent' : below}">
+                    <app-pie-grid [data]="data" [legendPosition]="legendPosition" ></app-pie-grid>
+                  </ion-card-content>
+               </ion-card>
       </swiper-slide>
-      <swiper-slide>ola</swiper-slide>
-    </swiper-container>
+        <swiper-slide> 
+            <ion-card> 
+                <ion-card-title class="ion-padding-start">Gráfico de barras verticales</ion-card-title>
+                  <ion-card-content class="ion-margin-top" [ngClass]="{'cardContent' : below}">
+                     <app-vertical-bar-chart [view]="view" [legendPosition]="legendPosition"[data]="data" ></app-vertical-bar-chart>
+                   </ion-card-content>
+           </ion-card>
+        </swiper-slide>
+        <swiper-slide>ola</swiper-slide>
+      </swiper-container>
+   </ion-card>
+    
     <ion-card>
       <ion-card-title class="ion-padding-start">Gráfico de pie gid</ion-card-title>
     <ion-card-content class="ion-margin-top" [ngClass]="{'cardContent' : below}">
