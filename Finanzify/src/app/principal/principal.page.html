@@ -55,7 +55,7 @@
           <ion-label>Configuración de la cuenta</ion-label>
         </ion-item>
         <ion-item>
-          <ion-button fill="clear">
+          <ion-button fill="clear"  (click)="toggleDarkMode()">
             <ion-icon slot="start" name="color-filter-outline" color="warning"></ion-icon>
           </ion-button>
           <ion-label>Cambiar tema</ion-label>
@@ -93,7 +93,7 @@
         <ion-col size="9" class="custom-button-center">
           <img src="assets/fianzify.png" alt="Logo" >
         </ion-col>
-        <ion-col  size="auto"class="custom-thumbnail-center">
+        <ion-col  size="auto"class="custom-thumbnail-center"  (click)="openImageModal()">
           <ion-thumbnail class="custom-thumbnail-center">
             <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
           </ion-thumbnail>
@@ -113,5 +113,12 @@
      </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>
-
+<ion-modal [isOpen]="showModal" (ionModalDidDismiss)="closeImageModal()">
+  <ion-content>
+    <div class="modal-background" (click)="closeImageModal()"></div>
+    <div class="modal-container">
+      <img src="https://ionicframework.com/docs/img/demos/thumbnail.svg" alt="Imagen en grande">
+    </div>
+  </ion-content>
+</ion-modal>
 

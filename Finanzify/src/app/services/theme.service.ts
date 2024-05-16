@@ -20,4 +20,11 @@ export class ThemeService {
     this.document.documentElement.classList.remove('dark-theme');
     this.document.documentElement.classList.add('light-theme');
   }
+  toggleDarkMode() {
+    if (this.document.documentElement.classList.contains('dark-theme')) {
+      this.disableDarkMode(); 
+    } else {
+      this.enableDarkMode(); 
+    }
+  }
 }

@@ -5,7 +5,7 @@ import { IonContent, IonicModule } from '@ionic/angular';
 import { RouterLink, RouterModule } from '@angular/router';
 import { moon, sunnyOutline } from 'ionicons/icons';
 import { ThemeService } from '../services/theme.service';
-import { IonButton, IonButtons, IonCol, IonFab, IonFabButton, IonFabList, IonFooter, IonGrid, IonHeader, IonItemDivider, IonRow, IonTextarea } from '@ionic/angular/standalone';
+import { IonButton, IonButtons, IonCol, IonFab, IonFabButton, IonFabList, IonFooter, IonGrid, IonHeader, IonItemDivider, IonRow, IonSpinner, IonTextarea, LoadingController } from '@ionic/angular/standalone';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
@@ -15,16 +15,16 @@ import { Router } from '@angular/router';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true, 
-  imports: [IonicModule, CommonModule, FormsModule, RouterModule,RouterLink]
+  //imports: [IonicModule, CommonModule, FormsModule, RouterModule,RouterLink]
                                                           //Para Android tendras que añadir estos imports (comando para hacer build: ionic capacitor build android )
-  //imports: [IonicModule, CommonModule, FormsModule, RouterModule,RouterLink,IonGrid,IonCol,IonRow,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList],//,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList
+  imports: [IonicModule, CommonModule, FormsModule, RouterModule,RouterLink,IonGrid,IonCol,IonRow,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList,IonSpinner],//,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList
 })
 export class LoginPage implements OnInit {
   dni: string = '';
   contrasena: string = '';
   error: boolean = false;
   isToastOpen = false;
-  constructor(private themeService: ThemeService,private http:HttpClient, private router: Router) {} 
+  constructor(private themeService: ThemeService,private http:HttpClient, private router: Router , private loadingCtrl: LoadingController) {} 
  
   ngOnInit() {
   } 
@@ -32,7 +32,7 @@ export class LoginPage implements OnInit {
     if (isDarkMode) {
       this.themeService.enableDarkMode(); 
     } else {
-      this.themeService.disableDarkMode();  // Llama a la función de ThemeService aquí
+      this.themeService.disableDarkMode();
     }
   }
   
@@ -41,23 +41,26 @@ export class LoginPage implements OnInit {
     this.isToastOpen = isOpen;
   }
   entrar() {
+    this.showLoading()
     const datos = {
       dni: this.dni,
       contrasena: this.contrasena
     };
+    
 
     // Envía los datos al servidor para validar las credenciales
    // Realizar la solicitud GET
-  this.http.get<any>('http://localhost/prueba.php', { params: { dni: this.dni, contrasena: this.contrasena } }).subscribe(
+  this.http.get<any>('https://finanzify.sytes.net/prueba.php', { params: { dni: this.dni, contrasena: this.contrasena },
+}).subscribe(
   respuesta => {
+    this.loadingCtrl.dismiss();
     if (respuesta.valido) {
-      // Credenciales válidas, redirige al usuario a la página principal
       this.router.navigate(['/principal']);
     } else {
-      // Credenciales incorrectas, muestra un mensaje de error
       this.error = true;
       console.error('Credenciales incorrectas:', respuesta.mensaje);
       this.setOpen(true);
+      
       
     }
   },
@@ -68,6 +71,15 @@ export class LoginPage implements OnInit {
   }
  );
 
+  }
+  async showLoading() {
+    const loading = await this.loadingCtrl.create({
+      spinner: 'bubbles',
+      message: 'Iniciando sesión...',
+      translucent: true,
+    });
+
+    loading.present();
   }
  
 
