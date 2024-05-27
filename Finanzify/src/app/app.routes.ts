@@ -36,6 +36,10 @@ export const routes: Routes = [
   {
     path: 'contabilidad',
     loadComponent: () => import('./contabilidad/contabilidad.page').then( m => m.ContabilidadPage)
+  },  {
+    path: 'preguntas-seguridad',
+    loadComponent: () => import('./preguntas-seguridad/preguntas-seguridad.page').then( m => m.PreguntasSeguridadPage)
   },
+
 
 ];

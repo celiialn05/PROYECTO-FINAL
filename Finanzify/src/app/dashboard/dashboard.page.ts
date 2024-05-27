@@ -8,6 +8,11 @@ import { VerticalBarChartComponent } from '../components/vertical-bar-chart/vert
 import { PieGridComponent } from '../components/pie-grid/pie-grid.component';
 import { LegendPosition } from '@swimlane/ngx-charts';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { PieChartComponent } from '../components/pie-chart/pie-chart.component';
+import { TreeMapChartComponent } from '../components/treemap-chart/treemap-chart.component';
+import { NumberCardChartComponent } from '../components/number-card-chart/number-card-chart.component';
+import { GaugeChartComponent } from '../components/gauge-chart/gauge-chart.component';
+import { GroupedVerticalChartComponent } from '../components/grouped-vertical-chart/grouped-vertical-chart.component';
 
 
 
@@ -17,9 +22,9 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
   standalone: true,
-  //imports: [IonicModule, CommonModule, FormsModule,VerticalBarChartComponent,NgClass,PieGridComponent],
+  imports: [IonicModule, CommonModule, FormsModule,VerticalBarChartComponent,NgClass,PieGridComponent,PieChartComponent,TreeMapChartComponent,NumberCardChartComponent,GaugeChartComponent,GroupedVerticalChartComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
- imports: [IonicModule, CommonModule, FormsModule,VerticalBarChartComponent,NgClass,IonGrid,IonCol,IonRow,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList,IonToolbar,IonTitle,IonContent,IonCard,IonCardHeader,IonCardTitle,PieGridComponent]
+ //imports: [IonicModule, CommonModule, FormsModule,VerticalBarChartComponent,NgClass,IonGrid,IonCol,IonRow,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList,IonToolbar,IonTitle,IonContent,IonCard,IonCardHeader,IonCardTitle,PieGridComponent]
 })
 export class DashboardPage implements OnInit {
  
@@ -29,6 +34,114 @@ export class DashboardPage implements OnInit {
   view: any; 
   legendPosition!: LegendPosition;
   below:boolean = false;
+  data2: any[] = 
+    [
+      {
+        "name": "Germany",
+        "series": [
+          {
+            "name": "2010",
+            "value": 40632,
+            "extra": {
+              "code": "de"
+            }
+          },
+          {
+            "name": "2000",
+            "value": 36953,
+            "extra": {
+              "code": "de"
+            }
+          },
+          {
+            "name": "1990",
+            "value": 31476,
+            "extra": {
+              "code": "de"
+            }
+          }
+        ]
+      },
+      {
+        "name": "United States",
+        "series": [
+          {
+            "name": "2010",
+            "value": 0,
+            "extra": {
+              "code": "us"
+            }
+          },
+          {
+            "name": "2000",
+            "value": 45986,
+            "extra": {
+              "code": "us"
+            }
+          },
+          {
+            "name": "1990",
+            "value": 37060,
+            "extra": {
+              "code": "us"
+            }
+          }
+        ]
+      },
+      {
+        "name": "France",
+        "series": [
+          {
+            "name": "2010",
+            "value": 36745,
+            "extra": {
+              "code": "fr"
+            }
+          },
+          {
+            "name": "2000",
+            "value": 34774,
+            "extra": {
+              "code": "fr"
+            }
+          },
+          {
+            "name": "1990",
+            "value": 29476,
+            "extra": {
+              "code": "fr"
+            }
+          }
+        ]
+      },
+      {
+        "name": "United Kingdom",
+        "series": [
+          {
+            "name": "2010",
+            "value": 36240,
+            "extra": {
+              "code": "uk"
+            }
+          },
+          {
+            "name": "2000",
+            "value": 32543,
+            "extra": {
+              "code": "uk"
+            }
+          },
+          {
+            "name": "1990",
+            "value": 26424,
+            "extra": {
+              "code": "uk"
+            }
+          }
+        ]
+      }
+    ]
+  ;
 data: any[] = [
   {
     "name": "Alimentacion",
@@ -181,5 +294,16 @@ insertarDatos() {
       });
   }
 
+  meses: string[] = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+  anios: number[] = [2022, 2023, 2024]; // Puedes generar dinámicamente esta lista si es necesario
+  
+  mesSeleccionado: string = this.meses[new Date().getMonth()];
+  anioSeleccionado: number = new Date().getFullYear();
+
+  actualizarGrafico() {
+    console.log('Mes seleccionado:', this.mesSeleccionado);
+    console.log('Año seleccionado:', this.anioSeleccionado);
+  }
+  
 
 }

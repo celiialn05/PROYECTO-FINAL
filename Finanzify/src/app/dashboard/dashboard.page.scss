@@ -29,3 +29,19 @@ ion-card {
         font-size: 1.5em;
     }
 }
+
+.full-width-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra verticalmente el contenido */
+    align-items: center; /* Centra horizontalmente el contenido */
+  }
+  
+  /* Estilo para hacer que el Tree Map ocupe todo el espacio restante */
+  .full-width-treemap {
+    flex: 1; /* El Tree Map ocupa todo el espacio restante */
+  }
+
+  .custom-orange {
+    --background: #ff8800; /* Cambia el color de fondo del botón a naranja */
+  }

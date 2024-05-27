@@ -46,7 +46,31 @@
         <ion-button (click)="insertarDatos()">Insertar Datos</ion-button>
       </ion-card-content>
     </ion-card>   IMPORTANTE SWIPER npm install swiper@latest-->
-   <ion-card>
+  
+  
+    <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+      <ion-refresher-content pullingIcon="arrow-down" pullingText="" refreshingSpinner="circles" refreshingText="">
+      </ion-refresher-content>
+    </ion-refresher>
+  
+    <ion-card>
+      <ion-item>
+        <ion-label>Mes</ion-label>
+        <ion-select [(ngModel)]="mesSeleccionado">
+          <ion-select-option *ngFor="let mes of meses" [value]="mes">{{ mes }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    
+      <ion-item>
+        <ion-label>Año</ion-label>
+        <ion-select [(ngModel)]="anioSeleccionado">
+          <ion-select-option *ngFor="let anio of anios" [value]="anio">{{ anio }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    
+      <ion-button (click)="actualizarGrafico()" class="full-width-card custom-orange ">Actualizar Gráfico</ion-button>
+    </ion-card>
+   
      <h1 class="titulos-cards">Estadísticas del mes </h1>
       <swiper-container>
         <swiper-slide> 
@@ -61,65 +85,91 @@
             <ion-card> 
                 <ion-card-title class="ion-padding-start">Gastos planificados</ion-card-title>
                   <ion-card-content class="ion-margin-top" [ngClass]="{'cardContent' : below}">
-                     <app-vertical-bar-chart [view]="view" [legendPosition]="legendPosition"[data]="data" ></app-vertical-bar-chart>
+                     <app-vertical-bar-chart [view]="view" class="full-width-card " [legendPosition]="legendPosition"[data]="data" ></app-vertical-bar-chart>
                    </ion-card-content>
            </ion-card>
         </swiper-slide>
         <swiper-slide> 
-        
+          <ion-card> 
+              <ion-card-title class="ion-padding-start">Gastos planificados</ion-card-title>
+                <ion-card-content class="ion-margin-top" [ngClass]="{'cardContent' : below}">
+                   <app-pie-chart  [data]="data" [legendPosition]="legendPosition"></app-pie-chart>
+                 </ion-card-content>
+         </ion-card>
+      </swiper-slide>
+      <swiper-slide>
+        <ion-card class="ion-padding full-width-card">
+          <ion-card-title class="ion-padding-start">Tree Map Example</ion-card-title>
+          <ion-card-content class="ion-margin-top">
+            <app-treemap-chart class="full-width-treemap" [view]="view" [legendPosition]="legendPosition" [data]="data"></app-treemap-chart>
+          </ion-card-content>
+        </ion-card>
       </swiper-slide>
       </swiper-container>
-   </ion-card>
+   
 
-   <ion-card>
+   
     <h1 class="titulos-cards">Estadísticas del mes respecto al anterior mes </h1>
      <swiper-container>
-       <swiper-slide> 
+        <swiper-slide> 
              <ion-card>
                <ion-card-title class="ion-padding-start">Estabilidad Financiera</ion-card-title>
                  <ion-card-content class="ion-margin-top" [ngClass]="{'cardContent' : below}">
                    <app-pie-grid [data]="data" [legendPosition]="legendPosition" ></app-pie-grid>
                  </ion-card-content>
               </ion-card>
-     </swiper-slide>
+       </swiper-slide> 
+
        <swiper-slide> 
            <ion-card> 
                <ion-card-title class="ion-padding-start">Gastos planificados</ion-card-title>
                  <ion-card-content class="ion-margin-top" [ngClass]="{'cardContent' : below}">
-                    <app-vertical-bar-chart [view]="view" [legendPosition]="legendPosition"[data]="data" ></app-vertical-bar-chart>
-                  </ion-card-content>
+                  <app-number-card-chart [data]="data" [legendPosition]="legendPosition" ></app-number-card-chart>
+                 </ion-card-content>
           </ion-card>
-       </swiper-slide>
-       <swiper-slide> 
-       
-     </swiper-slide>
+        </swiper-slide>
+        <swiper-slide> 
+          <ion-card> 
+            <ion-card-title class="ion-padding-start">Gastos planificados</ion-card-title>
+              <ion-card-content class="ion-margin-top" [ngClass]="{'cardContent' : below}">
+                 <app-pie-chart  [data]="data" [legendPosition]="legendPosition"></app-pie-chart>
+               </ion-card-content>
+       </ion-card>
+    </swiper-slide>
      </swiper-container>
-  </ion-card>
-  <ion-card>
+ 
+  
     <h1 class="titulos-cards">Estadísticas anuales </h1>
+
      <swiper-container>
        <swiper-slide> 
              <ion-card>
                <ion-card-title class="ion-padding-start">Estabilidad Financiera</ion-card-title>
                  <ion-card-content class="ion-margin-top" [ngClass]="{'cardContent' : below}">
-                   <app-pie-grid [data]="data" [legendPosition]="legendPosition" ></app-pie-grid>
+                   <app-grouped-vertical-chart [data]="data2" [legendPosition]="legendPosition" ></app-grouped-vertical-chart>
                  </ion-card-content>
               </ion-card>
      </swiper-slide>
-       <swiper-slide> 
-           <ion-card> 
-               <ion-card-title class="ion-padding-start">Gastos planificados</ion-card-title>
+
+        <swiper-slide> 
+             <ion-card>
+               <ion-card-title class="ion-padding-start">Estabilidad Financiera</ion-card-title>
                  <ion-card-content class="ion-margin-top" [ngClass]="{'cardContent' : below}">
-                    <app-vertical-bar-chart [view]="view" [legendPosition]="legendPosition"[data]="data" ></app-vertical-bar-chart>
-                  </ion-card-content>
-          </ion-card>
-       </swiper-slide>
+                     <app-pie-chart  [data]="data" [legendPosition]="legendPosition"></app-pie-chart>
+                 </ion-card-content>
+              </ion-card>
+       </swiper-slide> 
        <swiper-slide> 
-       
-     </swiper-slide>
+        <ion-card>
+          <ion-card-title class="ion-padding-start">Estabilidad Financiera</ion-card-title>
+            <ion-card-content class="ion-margin-top" [ngClass]="{'cardContent' : below}">
+                <app-gauge-chart  [data]="data"></app-gauge-chart>
+            </ion-card-content>
+         </ion-card>
+  </swiper-slide>
      </swiper-container>
-  </ion-card>
- 
+  
+  <div style="margin-bottom: 20px;"></div>
 
 </ion-content>
 
