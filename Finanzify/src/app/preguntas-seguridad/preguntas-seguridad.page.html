@@ -11,47 +11,20 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-card>
+ 
+  <ion-card *ngFor="let pregunta of preguntas">
     <ion-card-header>
-      <ion-card-title>Pregunta 1</ion-card-title>
+      <ion-card-title>Pregunta {{ pregunta.id }}</ion-card-title>
+      <ion-card-title>{{ pregunta.pregunta }}</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <!-- Aquí puedes poner tu primera pregunta -->
-      <!-- Ejemplo de un input para la respuesta -->
       <ion-item>
         <ion-label>Respuesta</ion-label>
-        <ion-input type="text" placeholder="Respuesta"></ion-input>
+        <ion-input type="text" placeholder="Respuesta" [(ngModel)]="respuestas[pregunta.id]"></ion-input>
       </ion-item>
     </ion-card-content>
   </ion-card>
-
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Pregunta 2</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <!-- Aquí puedes poner tu segunda pregunta -->
-      <!-- Ejemplo de un input para la respuesta -->
-      <ion-item>
-        <ion-label>Respuesta</ion-label>
-        <ion-input type="text" placeholder="Respuesta"></ion-input>
-      </ion-item>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Pregunta 3</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <!-- Aquí puedes poner tu tercera pregunta -->
-      <!-- Ejemplo de un input para la respuesta -->
-      <ion-item>
-        <ion-label>Respuesta</ion-label>
-        <ion-input type="text" placeholder="Respuesta"></ion-input>
-      </ion-item>
-    </ion-card-content>
-  </ion-card>
+ 
 
   <!-- Botón para enviar las respuestas -->
   <ion-button expand="block" color="primary">Enviar Respuestas</ion-button>

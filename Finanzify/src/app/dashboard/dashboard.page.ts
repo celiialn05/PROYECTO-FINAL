@@ -22,9 +22,9 @@ import { GroupedVerticalChartComponent } from '../components/grouped-vertical-ch
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule,VerticalBarChartComponent,NgClass,PieGridComponent,PieChartComponent,TreeMapChartComponent,NumberCardChartComponent,GaugeChartComponent,GroupedVerticalChartComponent],
+ // imports: [IonicModule, CommonModule, FormsModule,VerticalBarChartComponent,NgClass,PieGridComponent,PieChartComponent,TreeMapChartComponent,NumberCardChartComponent,GaugeChartComponent,GroupedVerticalChartComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
- //imports: [IonicModule, CommonModule, FormsModule,VerticalBarChartComponent,NgClass,IonGrid,IonCol,IonRow,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList,IonToolbar,IonTitle,IonContent,IonCard,IonCardHeader,IonCardTitle,PieGridComponent]
+ imports: [IonicModule, CommonModule, FormsModule,VerticalBarChartComponent,NgClass,IonGrid,IonCol,IonRow,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList,IonToolbar,IonTitle,IonContent,IonCard,IonCardHeader,IonCardTitle,PieGridComponent,PieChartComponent,TreeMapChartComponent,NumberCardChartComponent,GaugeChartComponent,GroupedVerticalChartComponent]
 })
 export class DashboardPage implements OnInit {
  
@@ -281,7 +281,7 @@ insertarDatos() {
     return;
   }
 
-  const url = 'http://192.168.1.247/prueba.php';
+  const url = 'https://finanzify.sytes.net/prueba.php';
 
     // Realizar la solicitud POST para insertar datos
     this.http.post(url, datos)

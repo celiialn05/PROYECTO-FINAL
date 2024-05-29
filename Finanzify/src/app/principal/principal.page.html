@@ -93,10 +93,10 @@
         <ion-col size="9" class="custom-button-center">
           <img src="assets/fianzify.png" alt="Logo" >
         </ion-col>
-        <ion-col  size="auto"class="custom-thumbnail-center"  (click)="openImageModal()">
+        <ion-col  size="auto"class="custom-thumbnail-center" >
           <ion-thumbnail class="custom-thumbnail-center">
-            <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
-          </ion-thumbnail>
+            <img [src]="imagenUrl || 'https://ionicframework.com/docs/img/demos/thumbnail.svg'" alt="Imagen de usuario" />
+          </ion-thumbnail>                    
         </ion-col>
       </ion-row>
      
@@ -113,12 +113,5 @@
      </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>
-<ion-modal [isOpen]="showModal" (ionModalDidDismiss)="closeImageModal()">
-  <ion-content>
-    <div class="modal-background" (click)="closeImageModal()"></div>
-    <div class="modal-container">
-      <img src="https://ionicframework.com/docs/img/demos/thumbnail.svg" alt="Imagen en grande">
-    </div>
-  </ion-content>
-</ion-modal>
+
 
