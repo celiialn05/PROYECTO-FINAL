@@ -13,7 +13,7 @@ import { TreeMapChartComponent } from '../components/treemap-chart/treemap-chart
 import { NumberCardChartComponent } from '../components/number-card-chart/number-card-chart.component';
 import { GaugeChartComponent } from '../components/gauge-chart/gauge-chart.component';
 import { GroupedVerticalChartComponent } from '../components/grouped-vertical-chart/grouped-vertical-chart.component';
-
+import { UserService } from '../services/UserService';
 
 
 
@@ -22,12 +22,12 @@ import { GroupedVerticalChartComponent } from '../components/grouped-vertical-ch
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
   standalone: true,
- // imports: [IonicModule, CommonModule, FormsModule,VerticalBarChartComponent,NgClass,PieGridComponent,PieChartComponent,TreeMapChartComponent,NumberCardChartComponent,GaugeChartComponent,GroupedVerticalChartComponent],
+  imports: [IonicModule, CommonModule, FormsModule,VerticalBarChartComponent,NgClass,PieGridComponent,PieChartComponent,TreeMapChartComponent,NumberCardChartComponent,GaugeChartComponent,GroupedVerticalChartComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
- imports: [IonicModule, CommonModule, FormsModule,VerticalBarChartComponent,NgClass,IonGrid,IonCol,IonRow,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList,IonToolbar,IonTitle,IonContent,IonCard,IonCardHeader,IonCardTitle,PieGridComponent,PieChartComponent,TreeMapChartComponent,NumberCardChartComponent,GaugeChartComponent,GroupedVerticalChartComponent]
+ //imports: [IonicModule, CommonModule, FormsModule,VerticalBarChartComponent,NgClass,IonGrid,IonCol,IonRow,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList,IonToolbar,IonTitle,IonContent,IonCard,IonCardHeader,IonCardTitle,PieGridComponent,PieChartComponent,TreeMapChartComponent,NumberCardChartComponent,GaugeChartComponent,GroupedVerticalChartComponent]
 })
 export class DashboardPage implements OnInit {
- 
+  usuario: any;
   pruebas : any = [];
   nombre: string = '';
   email: string = '';
@@ -211,12 +211,13 @@ data: any[] = [
 
 ];
 
-constructor(private http:HttpClient, private platform: Platform ) { }
+constructor(private http:HttpClient, private platform: Platform, private userService: UserService ) { }
 
 ngOnInit() {
   this.changeLegendPosition(false);
   this.handleScreenSizeChange();
- 
+  this.usuario = this.userService.getUsuario();
+  console.log('usu:', this.usuario.dni);
 }
 handleRefresh(event: any) {
   // Lógica para actualizar los datos aquí

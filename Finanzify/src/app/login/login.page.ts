@@ -8,6 +8,7 @@ import { ThemeService } from '../services/theme.service';
 import { IonButton, IonButtons, IonCol, IonFab, IonFabButton, IonFabList, IonFooter, IonGrid, IonHeader, IonItemDivider, IonRow, IonSpinner, IonTextarea, LoadingController } from '@ionic/angular/standalone';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { UserService } from '../services/UserService';
 
 
 @Component({
@@ -15,16 +16,16 @@ import { Router } from '@angular/router';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true, 
-  //imports: [IonicModule, CommonModule, FormsModule, RouterModule,RouterLink]
+  imports: [IonicModule, CommonModule, FormsModule, RouterModule,RouterLink]
                                                           //Para Android tendras que añadir estos imports (comando para hacer build: ionic capacitor build android )
-  imports: [IonicModule, CommonModule, FormsModule, RouterModule,RouterLink,IonGrid,IonCol,IonRow,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList,IonSpinner],//,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList
+  //imports: [IonicModule, CommonModule, FormsModule, RouterModule,RouterLink,IonGrid,IonCol,IonRow,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList,IonSpinner],//,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList
 })
 export class LoginPage implements OnInit {
   dni: string = '';
   contrasena: string = '';
   error: boolean = false;
   isToastOpen = false;
-  constructor(private themeService: ThemeService,private http:HttpClient, private router: Router , private loadingCtrl: LoadingController) {} 
+  constructor(private themeService: ThemeService,private http:HttpClient, private router: Router , private loadingCtrl: LoadingController, private UserService: UserService) {} 
  
   ngOnInit() {
   } 
@@ -49,7 +50,7 @@ export class LoginPage implements OnInit {
     };
     
     // Realizar la solicitud GET al servidor para validar las credenciales
-    this.http.get<any>('https://finanzify.sytes.net/login.php', { params: datos })
+    this.http.get<any>('http://192.168.1.247/login.php', { params: datos })
       .subscribe(
         respuesta => {
           this.loadingCtrl.dismiss(); // Ocultar el loading después de recibir la respuesta
@@ -59,6 +60,9 @@ export class LoginPage implements OnInit {
               dni: this.dni
             };
             this.router.navigate(['/principal'], { state: { usuario } });
+            this.UserService.setUsuario(usuario);
+            console.log('Usuario page principal:', usuario);
+
           } else {
             // Si las credenciales son incorrectas, mostrar mensaje de error
             this.error = true;

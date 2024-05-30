@@ -25,8 +25,8 @@ import { RouterLink, RouterModule } from '@angular/router';
   templateUrl: './principal.page.html',
   styleUrls: ['./principal.page.scss'],
   standalone: true,
-  //imports: [IonicModule, CommonModule, FormsModule, RouterModule]
-  imports: [IonicModule, CommonModule, FormsModule, RouterModule,IonMenu,IonMenuButton, IonTabBar,IonTabButton,IonGrid,IonCol,IonRow,RouterLink,IonHeader,IonThumbnail, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList] //IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList]
+  imports: [IonicModule, CommonModule, FormsModule, RouterModule]
+  //imports: [IonicModule, CommonModule, FormsModule, RouterModule,IonMenu,IonMenuButton, IonTabBar,IonTabButton,IonGrid,IonCol,IonRow,RouterLink,IonHeader,IonThumbnail, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList] //IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList]
 })
 export class PrincipalPage implements OnInit {
   usuario: any;
@@ -38,6 +38,7 @@ export class PrincipalPage implements OnInit {
     this.usuario = this.userService.getUsuario();
     if (this.usuario) {
       this.loadUserImage(this.usuario.dni);
+      console.log('Usuario pito :', this.usuario.dni );
     }
   }
   toggleDarkMode() {
@@ -45,15 +46,17 @@ export class PrincipalPage implements OnInit {
   }
   loadUserImage(dni: string) {
     this.http
-      .get('https://finanzify.sytes.net/principal.php', {
+      .get('http://192.168.1.247/principal.php', {
         params: { dni: dni },
-        responseType: 'blob', // Indicamos que esperamos una respuesta de tipo blob
+        responseType: 'blob',
       })
       .subscribe(
         (blob: Blob) => {
-          // Convertimos el blob a una URL de objeto y luego la convertimos en una URL segura
-          const blobUrl = URL.createObjectURL(blob);
-          this.imagenUrl = this.sanitizer.bypassSecurityTrustUrl(blobUrl);
+          const reader = new FileReader();
+          reader.onload = () => {
+            this.imagenUrl = reader.result as string;
+          };
+          reader.readAsDataURL(blob);
         },
         (error) => {
           console.error('Error al cargar la imagen:', error);

@@ -95,6 +95,7 @@
         </ion-col>
         <ion-col  size="auto"class="custom-thumbnail-center" >
           <ion-thumbnail class="custom-thumbnail-center">
+            
             <img [src]="imagenUrl || 'https://ionicframework.com/docs/img/demos/thumbnail.svg'" alt="Imagen de usuario" />
           </ion-thumbnail>                    
         </ion-col>
@@ -108,7 +109,7 @@
     <ion-tab-button tab="dashboard" >
       <ion-icon name="pie-chart-sharp" color="warning"></ion-icon>
     </ion-tab-button>
-    <ion-tab-button tab="contabilidad" >
+    <ion-tab-button tab="contabilidad"  [routerLink]="['/principal/contabilidad']" [queryParams]="{ usuario: usuario }" >
       <ion-icon name="cash-sharp" color="success"></ion-icon>
      </ion-tab-button>
   </ion-tab-bar>

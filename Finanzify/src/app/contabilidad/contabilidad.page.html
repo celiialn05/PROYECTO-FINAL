@@ -17,32 +17,21 @@
       <h2 style="font-size: 24px; color: orange; font-weight: bold;">Controla tus ahorros, toma el control de tu vida.</h2>
     </ion-card-header>
     <ion-card-content>
-      <!-- Botones desplegables para diferentes categorías -->
       <ion-item lines="none">
         <ion-label>Selecciona una categoría</ion-label>
-        <ion-select interface="action-sheet">
-          <ion-select-option value="ahorros">Ahorros</ion-select-option>
-          <ion-select-option value="salario"> Salario Mensual</ion-select-option>
-          <ion-select-option value="ocio">Ocio</ion-select-option>
-          <ion-select-option value="salud">Salud</ion-select-option>
-          <ion-select-option value="facturas">Facturas</ion-select-option>
-          <ion-select-option value="plataformas_online">Plataformas Online</ion-select-option>
-          <ion-select-option value="imprevistos">Imprevistos</ion-select-option>
-          <ion-select-option value="otros">Otros</ion-select-option>
-          <ion-select-option value="comida">Comida</ion-select-option>
-          <!-- Agrega más opciones según tus necesidades -->
+        <ion-select interface="action-sheet" [(ngModel)]="selectedCategoria">
+          <ion-select-option *ngFor="let categoria of categorias" [value]="categoria.CATEGORIA">
+            {{ categoria.CATEGORIA }}
+          </ion-select-option>
         </ion-select>
       </ion-item>
-
+      
       <!-- Campos para ingresar cantidades -->
       <ion-item>
         <ion-label position="stacked">Cantidad</ion-label>
-        <ion-input type="text" inputmode="numeric" placeholder="Ingrese la cantidad"></ion-input>
-
+        <ion-input type="text" inputmode="numeric" placeholder="Ingrese la cantidad" [(ngModel)]="cantidad"></ion-input>
       </ion-item>
-
-      <!-- Botón para confirmar el ingreso -->
-      <ion-button expand="block" color="primary">Guardar</ion-button>
+      <ion-button (click)="insertRegistro()" expand= "block" class="custom-orange">Insertar Montos</ion-button>
     </ion-card-content>
   </ion-card>
 
@@ -53,54 +42,11 @@
     </ion-card-header>
     <ion-card-content>
       <ion-list>
-        <ion-item>
-          <ion-icon slot="start" name="wallet-outline"></ion-icon>
-          <ion-label>Ahorros</ion-label>
-          <ion-badge slot="end" color="success">1000€</ion-badge>
-        </ion-item>
-        <ion-item>
-          <ion-icon slot="start" name="cash-outline"></ion-icon>
-          <ion-label>Salario Mensual</ion-label>
-          <ion-badge slot="end"  color="success">2000€</ion-badge>
-        </ion-item>
-        <ion-item>
-          <ion-label>Ocio</ion-label>
-          <ion-icon slot="start" name="game-controller-outline"  ></ion-icon>
-          <ion-badge slot="end" color="danger">500€</ion-badge>
-        </ion-item>
-        <ion-item>
-          <ion-label>Salud</ion-label>
-          <ion-icon slot="start" name="medkit-outline"></ion-icon>
-          <ion-badge slot="end" color="danger">300€</ion-badge>
-        </ion-item>
-        <ion-item>
-          <ion-label>Facturas</ion-label>
-          <ion-icon slot="start" name="document-text-outline"></ion-icon>
-          <ion-badge slot="end"  color="danger">500€</ion-badge>
-        </ion-item>
-        
-        <ion-item>
-          <ion-label>Plataformas Online</ion-label>
-          <ion-icon slot="start" name="desktop-outline"></ion-icon>
-          <ion-badge slot="end"  color="danger">200€</ion-badge>
-        </ion-item>
-        
-        <ion-item>
-          <ion-label>Imprevistos</ion-label>
-          <ion-icon slot="start" name="warning-outline"></ion-icon>
-          <ion-badge slot="end"  color="danger">100€</ion-badge>
-        </ion-item>
-        <ion-item>
-          <ion-label>Otros</ion-label>
-          <ion-icon slot="start" name="ellipsis-horizontal-outline"></ion-icon>
-          <ion-badge slot="end"  color="danger">150€</ion-badge>
-        </ion-item>
-        <ion-item>
-          <ion-label>Comida</ion-label>
-          <ion-icon slot="start" name="restaurant-outline"></ion-icon>
-          <ion-badge slot="end"  color="danger">200€</ion-badge> <!-- Reemplaza "XX" con el valor correspondiente -->
-        </ion-item>
-        <!-- Agrega más elementos según tus necesidades -->
+        <ion-item *ngFor="let monto of montos">
+          <ion-icon slot="start" [name]="getIconName(monto.CATEGORIA)"></ion-icon>
+          <ion-label>{{ monto.CATEGORIA }}</ion-label>
+          <ion-badge slot="end" [color]="getBadgeColor(monto.CATEGORIA)">{{ monto.SUMA_MENSUAL }}€</ion-badge>
+        </ion-item> 
       </ion-list>
     </ion-card-content>
   </ion-card>

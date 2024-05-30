@@ -22,8 +22,8 @@ import { Pregunta } from './pregunta.model'; // Importa la clase Pregunta
   templateUrl: './preguntas-seguridad.page.html',
   styleUrls: ['./preguntas-seguridad.page.scss'],
   standalone: true,
-  //imports: [IonicModule, CommonModule, FormsModule]
-  imports: [IonicModule, CommonModule, FormsModule,NgClass,IonGrid,IonCol,IonRow,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList,IonToolbar,IonTitle,IonContent,IonCard,IonCardHeader,IonCardTitle,PieGridComponent]
+  imports: [IonicModule, CommonModule, FormsModule]
+  //imports: [IonicModule, CommonModule, FormsModule,NgClass,IonGrid,IonCol,IonRow,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList,IonToolbar,IonTitle,IonContent,IonCard,IonCardHeader,IonCardTitle,PieGridComponent]
 
 })
 export class PreguntasSeguridadPage implements OnInit {
@@ -37,7 +37,7 @@ export class PreguntasSeguridadPage implements OnInit {
   }
 
   getPreguntasSeguridad() {
-    this.http.get<any[]>('https://finanzify.sytes.net/preguntas-seguridad.php').subscribe(
+    this.http.get<any[]>('http://192.168.1.247/preguntas-seguridad.php').subscribe(
       data => {
         // Mapea los datos del servidor a objetos de pregunta usando la clase Pregunta
         this.preguntas = data.map(item => new Pregunta(item.id, item.pregunta));
