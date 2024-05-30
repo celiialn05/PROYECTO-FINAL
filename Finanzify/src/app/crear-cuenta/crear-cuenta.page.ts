@@ -37,24 +37,6 @@ export class CrearCuentaPage implements OnInit {
     const fileInput = document.getElementById('imageInput') as HTMLInputElement;
     fileInput.click();
   }
-
-  validarContrasena(contrasena: string): boolean {
-    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
-    return regex.test(contrasena);
-  }
-
-  // Método para validar el formato del DNI
-  validarDNI(dni: string): boolean {
-    const regex = /^\d{8}[a-zA-Z]$/;
-    return regex.test(dni);
-  }
-
-  // Método para validar el formato del email
-  validarEmail(email: string): boolean {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
-  }
-
   async onRegister() {
     const nombre = (document.getElementById('nombre') as HTMLInputElement).value;
     const apellidos = (document.getElementById('apellidos') as HTMLInputElement).value;
