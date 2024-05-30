@@ -1,17 +1,12 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Preguntas de Seguridad</ion-title>
-  </ion-toolbar>
-</ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Preguntas de Seguridad</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
  
+  <ion-row>
+    <ion-col size="12" class="custom-button-center">
+      <img src="assets/seguridad.png" alt="Logo de la aplicación" class="custom-button-center">
+    </ion-col>
+  </ion-row>
+
   <ion-card *ngFor="let pregunta of preguntas">
     <ion-card-header>
       <ion-card-title>Pregunta {{ pregunta.id }}</ion-card-title>
@@ -27,5 +22,5 @@
  
 
   <!-- Botón para enviar las respuestas -->
-  <ion-button expand="block" color="primary">Enviar Respuestas</ion-button>
+  <ion-button expand="block" class = "custom-orange" (click)="enviarRespuestas()">Enviar Respuestas</ion-button>
 </ion-content>
