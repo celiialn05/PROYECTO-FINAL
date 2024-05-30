@@ -50,34 +50,23 @@
             <ion-card-title>Datos de la cuenta</ion-card-title>
           </ion-card-header>
           <ion-card-content>
-            <ion-item [class.invalid]="!validarEmail">
+            <ion-item>
               <ion-label position="floating">Email</ion-label>
-              <ion-input id="email" type="email" [(ngModel)]="email"></ion-input>
-              <ion-icon name="close-circle" slot="end" *ngIf="emailInvalido"></ion-icon>
+              <ion-input id="email" type="email"></ion-input>
             </ion-item>
-            <ion-text color="danger" *ngIf="emailInvalido">Formato de correo electrónico inválido</ion-text>
-        
-            <ion-item [class.invalid]="!validarDNI">
+            <ion-item>
               <ion-label position="floating">DNI</ion-label>
-              <ion-input id="dni" type="text" [(ngModel)]="dni"></ion-input>
-              <ion-icon name="close-circle" slot="end" *ngIf="dniInvalido"></ion-icon>
+              <ion-input id="dni" type="text"></ion-input>
             </ion-item>
-            <ion-text color="danger" *ngIf="dniInvalido">Formato de DNI inválido</ion-text>
-        
-            <ion-item [class.invalid]="!validarContrasena">
+            <ion-item>
               <ion-label position="floating">Contraseña</ion-label>
-              <ion-input id="contrasena" type="password" [(ngModel)]="contrasena"></ion-input>
-              <ion-icon name="close-circle" slot="end" *ngIf="contrasenaInvalida"></ion-icon>
+              <ion-input id="contrasena" type="password"></ion-input>
             </ion-item>
-            <ion-text color="danger" *ngIf="contrasenaInvalida">La contraseña debe tener al menos 8 caracteres, una mayúscula y un número</ion-text>
-        
             <ion-item>
               <ion-label position="floating">Repetir Contraseña</ion-label>
-              <ion-input id="repetirContrasena" type="password" [(ngModel)]="repetirContrasena"></ion-input>
+              <ion-input id="repetirContrasena" type="password"></ion-input>
             </ion-item>
-            <!-- Aquí podrías agregar lógica adicional para validar que las contraseñas coincidan -->
-        
-            <ion-button expand="block" class="custom-black" (click)="onRegister()">Crear Cuenta</ion-button>
+            <ion-button expand="block" class="custom-black" (click)="crearCuenta()">Crear Cuenta</ion-button>
           </ion-card-content>
         </ion-card>
         
