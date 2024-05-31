@@ -63,45 +63,31 @@ export class PreguntasSeguridadPage implements OnInit {
   };
 
   enviarRespuestas() {
-    // Convertir this.respuestas en un array si es un objeto
-    const respuestasArray = Array.isArray(this.respuestas) ? this.respuestas : Object.values(this.respuestas);
-  
-    // Verificar si hay respuestas vacías en el array
-    const respuestasVacias = respuestasArray.some(respuesta => !respuesta);
-    
-    if (respuestasVacias) {
-      this.presentAlert('Error', 'Por favor, completa todas las respuestas.');
-      return;
-    }
-  
-    // Agregar el nodo "respuestas" alrededor del array de respuestas
-    const respuestasFormateadas = { respuestas: respuestasArray };
-  
-    const dni = this.userService.getUsuario().dni;
-    const respuestas = JSON.stringify(respuestasFormateadas);
-  
-    const url = `http://192.168.1.247/preguntas-seguridad.php?query=respuestas&dni=${dni}&respuestas=${encodeURIComponent(respuestas)}`;
-  
-    this.http.get<any>(url)
-      .subscribe(
-        (data) => {
-          console.log('Respuestas enviadas correctamente: ', data);
-          this.presentAlert('Respuestas enviadas', 'Tus respuestas se han enviado correctamente.');
-          console.log(respuestasArray);
-          this.router.navigate(['/login']);
-        },
-        (error) => {
-          console.error('Error al enviar respuestas: ', error);
-          this.presentAlert('Error', 'Ha ocurrido un error al enviar tus respuestas.');
-        }
-      );
+
+    const url = 'http://192.168.1.247/preguntas-seguridad.php?query=respuestas';
+    const body = {
+      dni:  this.userService.getUsuario().dni,
+      respuestas: this.respuestas
+    };
+
+    this.http.post<any>(url, body).subscribe(
+      (data) => {
+        console.log('Respuestas enviadas correctamente: ', data);
+        this.presentAlert('Respuestas enviadas', 'Tus respuestas se han enviado correctamente.');
+        console.log(this.respuestas);
+        this.router.navigate(['/login']);
+      },
+      (error) => {
+        console.error('Error al enviar respuestas: ', error);
+        this.presentAlert('Error', 'Ha ocurrido un error al enviar tus respuestas.');
+      }
+    );
   }
-  
-  
+
   async presentAlert(header: string, message: string) {
     const alert = await this.alertController.create({
-      header,
-      message,
+      header: header,
+      message: message,
       buttons: ['OK']
     });
     await alert.present();

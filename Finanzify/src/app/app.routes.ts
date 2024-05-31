@@ -36,9 +36,18 @@ export const routes: Routes = [
   {
     path: 'contabilidad',
     loadComponent: () => import('./contabilidad/contabilidad.page').then( m => m.ContabilidadPage)
-  },  {
+  },
+  {
     path: 'preguntas-seguridad',
     loadComponent: () => import('./preguntas-seguridad/preguntas-seguridad.page').then( m => m.PreguntasSeguridadPage)
+  },
+  {
+    path: 'recuperar-cuenta',
+    loadComponent: () => import('./recuperar-cuenta/recuperar-cuenta.page').then( m => m.RecuperarCuentaPage)
+  },
+  {
+    path: 'modificar-cuenta',
+    loadComponent: () => import('./modificar-cuenta/modificar-cuenta.page').then( m => m.ModificarCuentaPage)
   },
 
 

@@ -9,6 +9,7 @@ import { IonButton, IonButtons, IonCol, IonFab, IonFabButton, IonFabList, IonFoo
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { UserService } from '../services/UserService';
+import { StorageService } from '../services/StorageService';
 
 
 @Component({
@@ -16,6 +17,7 @@ import { UserService } from '../services/UserService';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true, 
+  //providers: [ThemeService, HttpClient, UserService, StorageService, LoadingController],
   imports: [IonicModule, CommonModule, FormsModule, RouterModule,RouterLink]
                                                           //Para Android tendras que añadir estos imports (comando para hacer build: ionic capacitor build android )
   //imports: [IonicModule, CommonModule, FormsModule, RouterModule,RouterLink,IonGrid,IonCol,IonRow,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList,IonSpinner],//,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList
@@ -25,7 +27,7 @@ export class LoginPage implements OnInit {
   contrasena: string = '';
   error: boolean = false;
   isToastOpen = false;
-  constructor(private themeService: ThemeService,private http:HttpClient, private router: Router , private loadingCtrl: LoadingController, private UserService: UserService) {} 
+  constructor(private themeService: ThemeService,private http:HttpClient, private router: Router , private loadingCtrl: LoadingController, private UserService: UserService  ) {} 
  
   ngOnInit() {
   } 
@@ -42,26 +44,29 @@ export class LoginPage implements OnInit {
     this.isToastOpen = isOpen;
   }
   async entrar() {
-    await this.showLoading(); // Mostrar el loading
+    await this.showLoading(); 
   
     const datos = {
       dni: this.dni,
       contrasena: this.contrasena
     };
     
-    // Realizar la solicitud GET al servidor para validar las credenciales
     this.http.get<any>('http://192.168.1.247/login.php', { params: datos })
       .subscribe(
         respuesta => {
-          this.loadingCtrl.dismiss(); // Ocultar el loading después de recibir la respuesta
+          this.loadingCtrl.dismiss(); 
           if (respuesta.valido) {
-            // Si las credenciales son válidas, navegar a la página principal
+          
             const usuario = {
               dni: this.dni
-            };
-            this.router.navigate(['/principal'], { state: { usuario } });
+            }
+
             this.UserService.setUsuario(usuario);
+           // this.StorageService.set('usuario', usuario);
+
+            this.router.navigate(['/principal'], { state: { usuario } });
             console.log('Usuario page principal:', usuario);
+          //  console.log('Usuario page principal STORAGE:', this.UserService.getUsuario());
 
           } else {
             // Si las credenciales son incorrectas, mostrar mensaje de error

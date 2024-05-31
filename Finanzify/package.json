@@ -30,6 +30,7 @@
     "@capacitor/status-bar": "5.0.7",
     "@ionic/angular": "^7.8.0",
     "@ionic/angular-server": "^7.8.0",
+    "@ionic/storage-angular": "^4.0.0",
     "@swimlane/ngx-charts": "^20.5.0",
     "bcryptjs": "^2.4.3",
     "crypto-js": "^4.2.0",
