@@ -15,7 +15,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./contabilidad.page.scss'],
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule]
-   //imports: [IonicModule, CommonModule, FormsModule,IonGrid,IonCol,IonRow,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList,IonToolbar,IonTitle,IonContent,IonCard,IonCardHeader,IonCardTitle,IonBadge,IonList,IonItem,IonInput,IonSelect]
+  // imports: [IonicModule, CommonModule, FormsModule,IonGrid,IonCol,IonRow,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList,IonToolbar,IonTitle,IonContent,IonCard,IonCardHeader,IonCardTitle,IonBadge,IonList,IonItem,IonInput,IonSelect]
 })
 export class ContabilidadPage implements OnInit {
   //Declaraciones necesarias
@@ -77,13 +77,11 @@ export class ContabilidadPage implements OnInit {
   // Petición para insertar un registro
   async insertRegistro() {
 
-    // Verificar si se ha seleccionado una categoría
     if (!this.selectedCategoria) {
       this.presentAlert('Error', 'Por favor, seleccione una categoría.');
       return;
     }
-
-    // Verificar si la cantidad es un número válido
+    
     if (isNaN(this.cantidad) || this.cantidad <= 0) {
       this.presentAlert('Error', 'Por favor, ingrese una cantidad válida.');
       return;

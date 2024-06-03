@@ -1,47 +1,62 @@
 ion-card {
-    margin: 30px;
-    ion-card-title {
-        font-size: 1.2rem;
-    }
-    ion-card-content {
-        padding: 30px 0 10px 0;
-    }
-    .cardContent {
-       height: 55vh;
-    }
+  margin: 30px;
+  ion-card-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      justify-content: center; 
+      align-items: center
+  }
+  ion-card-content {
+      padding: 30px 0 10px 0;
+  }
+  .cardContent {
+     height: 55vh;
+  }
 
 }
 .titulos-cards {
-    text-align: center; 
-    font-size: 2em; 
-    font-weight: bold;
-    color: orange;
+  text-align: center; 
+  font-size: 2em; 
+  font-weight: bold;
+  color: orange;
 }
 .titulos-card2 {
-    text-align: center; 
-    font-size: 1.5em;
-    color: rgb(106, 104, 102); 
+  text-align: center; 
+  font-size: 1.5em;
+  color: rgb(106, 104, 102); 
 }
 
 /* Tamaño de fuente específico para dispositivos móviles */
 @media (max-width: 768px) {
-    .titulos-cards {
-        font-size: 1.5em;
-    }
+  .titulos-cards {
+      font-size: 1.5em;
+  }
 }
 
 .full-width-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Centra verticalmente el contenido */
-    align-items: center; /* Centra horizontalmente el contenido */
-  }
-  
-  /* Estilo para hacer que el Tree Map ocupe todo el espacio restante */
-  .full-width-treemap {
-    flex: 1; /* El Tree Map ocupa todo el espacio restante */
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centra verticalmente el contenido */
+  align-items: center; /* Centra horizontalmente el contenido */
+}
 
-  .custom-orange {
-    --background: #ff8800; /* Cambia el color de fondo del botón a naranja */
-  }
+/* Estilo para hacer que el Tree Map ocupe todo el espacio restante */
+.full-width-chart {
+  flex: 1; /* El Tree Map ocupa todo el espacio restante */
+}
+
+.custom-orange {
+  --background: #ff8800; /* Cambia el color de fondo del botón a naranja */
+}
+
+
+.warning-icon {
+  font-size: 3em;
+  display: block; 
+  margin: auto;
+}
+
+/* Estilos para el contenido del card cuando no hay datos */
+.no-data-content {
+  text-align: center; 
+}

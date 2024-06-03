@@ -20,8 +20,8 @@ export class NumberCardChartComponent  implements OnInit {
   showLabels: boolean = true;
   animations: boolean = true;
 
-  colorScheme: any = {
-    domain: ['#FF5733', '#FF8C00', '#FFA500', '#FFD700', '#FF6347', '#FF4500']
+  @Input() colorScheme: any = {
+    domain: ['#4CAF50', '#66BB6A', '#FF5733']
   };
 
   constructor() {}

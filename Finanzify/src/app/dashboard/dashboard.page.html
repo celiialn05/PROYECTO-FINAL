@@ -1,19 +1,3 @@
-<!-- This is the HTML template for the Dashboard page
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Dashboard</ion-title>
-  </ion-toolbar>
-</ion-header>
- -->
-
- <!-- Header que realmente no se usa, pero lo dejo por si acaso
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Login</ion-title>
-  </ion-toolbar>
-</ion-header>
--->
-
 <ion-header>
   <ion-toolbar>
     <ion-title>Dashboard</ion-title>
@@ -21,157 +5,178 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  
+
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Dashboard</ion-title>
     </ion-toolbar>
   </ion-header>
 
+  <!-- Contenido de la página de Dashboard -->
+
+  <!--IMPORTANTE SWIPER npm install swiper@latest-->
+
   <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
     <ion-refresher-content pullingIcon="arrow-down" pullingText="" refreshingSpinner="circles" refreshingText="">
     </ion-refresher-content>
   </ion-refresher>
-  
-  <!-- Contenido de la página de Dashboard -->
-  
-  <!-- <ion-card>
-      <ion-card-header>
-        <ion-card-title>¡Hola!</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <p>dashboard.</p>
-        <ion-textarea [(ngModel)]="nombre" placeholder="Nombre"></ion-textarea>
-        <ion-textarea [(ngModel)]="email" placeholder="Correo electrónico"></ion-textarea>
-        <ion-button (click)="insertarDatos()">Insertar Datos</ion-button>
-      </ion-card-content>
-    </ion-card>   IMPORTANTE SWIPER npm install swiper@latest-->
-  
-  
-    <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
-      <ion-refresher-content pullingIcon="arrow-down" pullingText="" refreshingSpinner="circles" refreshingText="">
-      </ion-refresher-content>
-    </ion-refresher>
-  
-    <ion-card>
-      <ion-item>
-        <ion-label>Mes</ion-label>
-        <ion-select [(ngModel)]="mesSeleccionado">
-          <ion-select-option *ngFor="let mes of meses" [value]="mes">{{ mes }}</ion-select-option>
-        </ion-select>
-      </ion-item>
-    
-      <ion-item>
-        <ion-label>Año</ion-label>
-        <ion-select [(ngModel)]="anioSeleccionado">
-          <ion-select-option *ngFor="let anio of anios" [value]="anio">{{ anio }}</ion-select-option>
-        </ion-select>
-      </ion-item>
-    
-      <ion-button (click)="actualizarGrafico()" class="full-width-card custom-orange ">Actualizar Gráfico</ion-button>
-    </ion-card>
-   
-     <h1 class="titulos-cards">Estadísticas del mes </h1>
-      <swiper-container>
-        <swiper-slide> 
-              <ion-card>
-                <ion-card-title class="ion-padding-start">Estabilidad Financiera</ion-card-title>
-                  <ion-card-content class="ion-margin-top" [ngClass]="{'cardContent' : below}">
-                    <app-pie-grid [data]="data" [legendPosition]="legendPosition" ></app-pie-grid>
-                  </ion-card-content>
-               </ion-card>
-      </swiper-slide>
-        <swiper-slide> 
-            <ion-card> 
-                <ion-card-title class="ion-padding-start">Gastos planificados</ion-card-title>
-                  <ion-card-content class="ion-margin-top" [ngClass]="{'cardContent' : below}">
-                     <app-vertical-bar-chart [view]="view" class="full-width-card " [legendPosition]="legendPosition"[data]="data" ></app-vertical-bar-chart>
-                   </ion-card-content>
-           </ion-card>
-        </swiper-slide>
-        <swiper-slide> 
-          <ion-card> 
-              <ion-card-title class="ion-padding-start">Gastos planificados</ion-card-title>
-                <ion-card-content class="ion-margin-top" [ngClass]="{'cardContent' : below}">
-                   <app-pie-chart  [data]="data" [legendPosition]="legendPosition"></app-pie-chart>
-                 </ion-card-content>
-         </ion-card>
-      </swiper-slide>
-      <swiper-slide>
-        <ion-card class="ion-padding full-width-card">
-          <ion-card-title class="ion-padding-start">Tree Map Example</ion-card-title>
-          <ion-card-content class="ion-margin-top">
-            <app-treemap-chart class="full-width-treemap" [view]="view" [legendPosition]="legendPosition" [data]="data"></app-treemap-chart>
-          </ion-card-content>
-        </ion-card>
-      </swiper-slide>
-      </swiper-container>
-   
 
-   
-    <h1 class="titulos-cards">Estadísticas del mes respecto al anterior mes </h1>
-     <swiper-container>
-        <swiper-slide> 
-             <ion-card>
-               <ion-card-title class="ion-padding-start">Estabilidad Financiera</ion-card-title>
-                 <ion-card-content class="ion-margin-top" [ngClass]="{'cardContent' : below}">
-                   <app-pie-grid [data]="data" [legendPosition]="legendPosition" ></app-pie-grid>
-                 </ion-card-content>
-              </ion-card>
-       </swiper-slide> 
+  <ion-card>
+    <ion-item>
+      <ion-label>Mes</ion-label>
+      <ion-select [(ngModel)]="mesSeleccionado">
+        <ion-select-option *ngFor="let mes of meses" [value]="mes.valor">{{ mes.nombre }}</ion-select-option>
+      </ion-select>
+    </ion-item>
 
-       <swiper-slide> 
-           <ion-card> 
-               <ion-card-title class="ion-padding-start">Gastos planificados</ion-card-title>
-                 <ion-card-content class="ion-margin-top" [ngClass]="{'cardContent' : below}">
-                  <app-number-card-chart [data]="data" [legendPosition]="legendPosition" ></app-number-card-chart>
-                 </ion-card-content>
-          </ion-card>
-        </swiper-slide>
-        <swiper-slide> 
-          <ion-card> 
-            <ion-card-title class="ion-padding-start">Gastos planificados</ion-card-title>
-              <ion-card-content class="ion-margin-top" [ngClass]="{'cardContent' : below}">
-                 <app-pie-chart  [data]="data" [legendPosition]="legendPosition"></app-pie-chart>
-               </ion-card-content>
-       </ion-card>
+    <ion-item>
+      <ion-label>Año</ion-label>
+      <ion-select [(ngModel)]="anioSeleccionado">
+        <ion-select-option *ngFor="let anio of anios" [value]="anio">{{ anio }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-button (click)="actualizarGrafico()" class="full-width-card custom-orange ">Actualizar Gráfico</ion-button>
+  </ion-card>
+
+  <h1 class="titulos-cards">Estadísticas del mes </h1>
+  <swiper-container>
+    <swiper-slide *ngIf="datos_salario_ahorros && datos_salario_ahorros.length > 0">
+      <ion-card>
+        <ion-card-title class="ion-padding ion-padding full-width-card">Datos generales</ion-card-title>
+        <ion-card-content class="ion-margin-top" [ngClass]="{'cardContent' : below}">
+          <app-number-card-chart [data]="datos_salario_ahorros"
+            [legendPosition]="legendPosition"></app-number-card-chart>
+        </ion-card-content>
+      </ion-card>
     </swiper-slide>
-     </swiper-container>
- 
-  
-    <h1 class="titulos-cards">Estadísticas anuales </h1>
 
-     <swiper-container>
-       <swiper-slide> 
-             <ion-card>
-               <ion-card-title class="ion-padding-start">Estabilidad Financiera</ion-card-title>
-                 <ion-card-content class="ion-margin-top" [ngClass]="{'cardContent' : below}">
-                   <app-grouped-vertical-chart [data]="data2" [legendPosition]="legendPosition" ></app-grouped-vertical-chart>
-                 </ion-card-content>
-              </ion-card>
-     </swiper-slide>
+    <swiper-slide *ngIf="datos_gastos && datos_gastos.length > 0">
+      <ion-card class="full-width-card">
+        <ion-card-title class="ion-padding ion-padding full-width-card">Desglose de Gastos</ion-card-title>
+        <ion-card-content class="ion-margin-top" [ngClass]="{'cardContent' : below}">
+          <app-vertical-bar-chart [view]="view" class="full-width-card " [legendPosition]="legendPosition"
+            [data]="datos_gastos"></app-vertical-bar-chart>
+        </ion-card-content>
+      </ion-card>
 
-        <swiper-slide> 
-             <ion-card>
-               <ion-card-title class="ion-padding-start">Estabilidad Financiera</ion-card-title>
-                 <ion-card-content class="ion-margin-top" [ngClass]="{'cardContent' : below}">
-                     <app-pie-chart  [data]="data" [legendPosition]="legendPosition"></app-pie-chart>
-                 </ion-card-content>
-              </ion-card>
-       </swiper-slide> 
-       <swiper-slide> 
-        <ion-card>
-          <ion-card-title class="ion-padding-start">Estabilidad Financiera</ion-card-title>
-            <ion-card-content class="ion-margin-top" [ngClass]="{'cardContent' : below}">
-                <app-gauge-chart  [data]="data"></app-gauge-chart>
-            </ion-card-content>
-         </ion-card>
-  </swiper-slide>
-     </swiper-container>
-  
+    </swiper-slide>
+    <swiper-slide *ngIf="datos_gastos && datos_gastos.length > 0">
+      <ion-card>
+        <ion-card-title class="ion-padding ion-padding full-width-card">Porcentaje de gastos</ion-card-title>
+        <ion-card-content class="ion-margin-top" [ngClass]="{'cardContent' : below}">
+          <app-pie-chart [data]="datos_gastos" [legendPosition]="legendPosition"></app-pie-chart>
+        </ion-card-content>
+      </ion-card>
+    </swiper-slide>
+
+    <swiper-slide *ngIf="data && data.length > 0">
+      <ion-card class="ion-padding full-width-card">
+        <ion-card-title class="ion-padding-start">Datos totales </ion-card-title>
+        <ion-card-content class="ion-margin-top">
+          <app-treemap-chart class="full-width-treemap" [view]="view" [legendPosition]="legendPosition"
+            [data]="data"></app-treemap-chart>
+        </ion-card-content>
+      </ion-card>
+    </swiper-slide>
+
+    <swiper-slide *ngIf="!data || data.length === 0">
+      <ion-card>
+        <ion-card-content class="no-data-content">
+          <ion-icon name="alert-circle" class="warning-icon"></ion-icon>
+          <h2 class="full-width-card custom-orange">No hay datos disponibles</h2>
+        </ion-card-content>
+      </ion-card>
+    </swiper-slide>
+
+  </swiper-container>
+
+
+
+  <h1 class="titulos-cards">Estadísticas del mes anterior </h1>
+  <swiper-container>
+
+    <swiper-slide *ngIf="datos_salario_ahorros && datos_salario_ahorros.length > 0">
+      <ion-card>
+        <ion-card-title class="ion-padding ion-padding full-width-card">Salario y ahorros</ion-card-title>
+        <ion-card-content class="ion-margin-top" [ngClass]="{'cardContent' : below}">
+          <app-vertical-bar-chart [data]="datos_salario_ahorros"
+            [legendPosition]="legendPosition"></app-vertical-bar-chart>
+        </ion-card-content>
+      </ion-card>
+    </swiper-slide>
+
+    <swiper-slide *ngIf="datos_gastos && datos_gastos.length > 0">
+      <ion-card>
+        <ion-card-title class="ion-padding ion-padding full-width-card">Gastos</ion-card-title>
+        <ion-card-content class="ion-margin-top" [ngClass]="{'cardContent' : below}">
+          <app-number-card-chart [data]="datos_gastos" [legendPosition]="legendPosition" [colorScheme]="customColorScheme"></app-number-card-chart>
+        </ion-card-content>
+      </ion-card>
+    </swiper-slide>
+
+    <swiper-slide *ngIf="data && data.length > 0">
+      <ion-card>
+        <ion-card-title class="ion-padding ion-padding full-width-card">Estadísticas totales</ion-card-title>
+        <ion-card-content class="ion-margin-top" [ngClass]="{'cardContent' : below}">
+          <app-pie-chart [data]="data" [legendPosition]="legendPosition" [isDoughnut]="true"></app-pie-chart>
+        </ion-card-content>
+      </ion-card>
+    </swiper-slide>
+
+    <swiper-slide *ngIf="!(datos_salario_ahorros && datos_salario_ahorros.length > 0) 
+                      && !(datos_gastos && datos_gastos.length > 0) 
+                      && !(data && data.length > 0)">
+      <ion-card>
+        <ion-card-content class="no-data-content">
+          <ion-icon name="alert-circle" class="warning-icon"></ion-icon>
+          <h2 class="full-width-card custom-orange">No hay datos disponibles</h2>
+        </ion-card-content>
+      </ion-card>
+    </swiper-slide>
+  </swiper-container>
+
+  <h1 class="titulos-cards">Estadísticas anuales </h1>
+  <swiper-container>
+
+    <swiper-slide *ngIf="datos_anuales && datos_anuales.length > 0">
+      <ion-card>
+        <ion-card-title class="ion-padding ion-padding full-width-card">Ahorros y gastos totales</ion-card-title>
+        <ion-card-content class="ion-margin-top" [ngClass]="{'cardContent' : below}">
+          <app-grouped-vertical-chart [data]="datos_anuales"
+            [legendPosition]="legendPosition"></app-grouped-vertical-chart>
+        </ion-card-content>
+      </ion-card>
+    </swiper-slide>
+
+    <swiper-slide *ngIf="datos_ahorros_gastos && datos_ahorros_gastos.length > 0">
+      <ion-card>
+        <ion-card-title class="ion-padding ion-padding full-width-card">Relación Gastos/Ingresos</ion-card-title>
+        <ion-card-content class="ion-margin-top" [ngClass]="{'cardContent' : below}">
+          <app-pie-chart [data]="datos_ahorros_gastos" [legendPosition]="legendPosition"  [colorScheme]="customColorgastos"></app-pie-chart>
+        </ion-card-content>
+      </ion-card>
+    </swiper-slide>
+
+    <swiper-slide *ngIf="datos_gauge && datos_gauge.length > 0">
+      <ion-card>
+        <ion-card-title class="ion-padding ion-padding full-width-card">Gastos por mes</ion-card-title>
+        <ion-card-content class="ion-margin-top" [ngClass]="{'cardContent' : below}">
+          <app-gauge-chart [data]="datos_gauge"></app-gauge-chart>
+        </ion-card-content>
+      </ion-card>
+    </swiper-slide>
+
+    <swiper-slide *ngIf="!datos_anuales || datos_anuales.length === 0">
+      <ion-card>
+        <ion-card-content class="no-data-content">
+          <ion-icon name="alert-circle" class="warning-icon"></ion-icon>
+          <h2 class="full-width-card custom-orange">No hay datos disponibles</h2>
+        </ion-card-content>
+      </ion-card>
+    </swiper-slide>
+
+  </swiper-container>
   <div style="margin-bottom: 20px;"></div>
 
 </ion-content>
-
-
-

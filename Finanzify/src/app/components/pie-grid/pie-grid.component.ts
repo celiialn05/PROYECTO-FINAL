@@ -14,7 +14,7 @@ import { LegendPosition } from '@swimlane/ngx-charts';
 })
 export class PieGridComponent implements OnInit {
 
-  showLegend: boolean = true;
+  showLegend: boolean = false;
   showLabels: boolean = true;
   @Input() view: any;
   @Input() legendPosition: any = LegendPosition.Below;

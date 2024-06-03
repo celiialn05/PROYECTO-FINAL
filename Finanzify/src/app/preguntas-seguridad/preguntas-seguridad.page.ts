@@ -57,11 +57,7 @@ export class PreguntasSeguridadPage implements OnInit {
       }
     );
   }
-  headers = {
-    'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'application/json; charset=UTF-8'
-  };
-
+  
   enviarRespuestas() {
 
     const url = 'http://192.168.1.247/preguntas-seguridad.php?query=respuestas';

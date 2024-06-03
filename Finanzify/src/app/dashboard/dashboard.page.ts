@@ -1,9 +1,9 @@
 import { Component, Host, HostListener, OnInit } from '@angular/core';
 import { CommonModule, NgClass } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonButton, IonButtons, IonContent, IonFooter, IonHeader, IonTitle, IonToolbar,IonFabButton, IonItemDivider,IonTextarea,IonFab,IonFabList, IonCard, IonCardHeader, IonCardTitle, IonGrid, IonCol, IonRow, Platform, IonicSlides } from '@ionic/angular/standalone';
-import {  IonicModule } from '@ionic/angular';
-import { HttpClient } from '@angular/common/http';
+import { IonButton, IonButtons, IonContent, IonFooter, LoadingController, AlertController, IonHeader, IonTitle, IonToolbar, IonFabButton, IonItemDivider, IonTextarea, IonFab, IonFabList, IonCard, IonCardHeader, IonCardTitle, IonGrid, IonCol, IonRow, Platform, IonicSlides } from '@ionic/angular/standalone';
+import { IonicModule } from '@ionic/angular';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { VerticalBarChartComponent } from '../components/vertical-bar-chart/vertical-bar-chart.component';
 import { PieGridComponent } from '../components/pie-grid/pie-grid.component';
 import { LegendPosition } from '@swimlane/ngx-charts';
@@ -22,289 +22,254 @@ import { UserService } from '../services/UserService';
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule,VerticalBarChartComponent,NgClass,PieGridComponent,PieChartComponent,TreeMapChartComponent,NumberCardChartComponent,GaugeChartComponent,GroupedVerticalChartComponent],
+  imports: [IonicModule, CommonModule, FormsModule, VerticalBarChartComponent, NgClass, PieGridComponent, PieChartComponent, TreeMapChartComponent, NumberCardChartComponent, GaugeChartComponent, GroupedVerticalChartComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   //imports: [IonicModule, CommonModule, FormsModule,VerticalBarChartComponent,NgClass,IonGrid,IonCol,IonRow,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList,IonToolbar,IonTitle,IonContent,IonCard,IonCardHeader,IonCardTitle,PieGridComponent,PieChartComponent,TreeMapChartComponent,NumberCardChartComponent,GaugeChartComponent,GroupedVerticalChartComponent]
 })
 export class DashboardPage implements OnInit {
   usuario: any;
-  pruebas : any = [];
+  pruebas: any = [];
   nombre: string = '';
   email: string = '';
-  view: any; 
-  legendPosition!: LegendPosition;
-  below:boolean = false;
-  data2: any[] = 
-    [
-      {
-        "name": "Germany",
-        "series": [
-          {
-            "name": "2010",
-            "value": 40632,
-            "extra": {
-              "code": "de"
-            }
-          },
-          {
-            "name": "2000",
-            "value": 36953,
-            "extra": {
-              "code": "de"
-            }
-          },
-          {
-            "name": "1990",
-            "value": 31476,
-            "extra": {
-              "code": "de"
-            }
-          }
-        ]
-      },
-      {
-        "name": "United States",
-        "series": [
-          {
-            "name": "2010",
-            "value": 0,
-            "extra": {
-              "code": "us"
-            }
-          },
-          {
-            "name": "2000",
-            "value": 45986,
-            "extra": {
-              "code": "us"
-            }
-          },
-          {
-            "name": "1990",
-            "value": 37060,
-            "extra": {
-              "code": "us"
-            }
-          }
-        ]
-      },
-      {
-        "name": "France",
-        "series": [
-          {
-            "name": "2010",
-            "value": 36745,
-            "extra": {
-              "code": "fr"
-            }
-          },
-          {
-            "name": "2000",
-            "value": 34774,
-            "extra": {
-              "code": "fr"
-            }
-          },
-          {
-            "name": "1990",
-            "value": 29476,
-            "extra": {
-              "code": "fr"
-            }
-          }
-        ]
-      },
-      {
-        "name": "United Kingdom",
-        "series": [
-          {
-            "name": "2010",
-            "value": 36240,
-            "extra": {
-              "code": "uk"
-            }
-          },
-          {
-            "name": "2000",
-            "value": 32543,
-            "extra": {
-              "code": "uk"
-            }
-          },
-          {
-            "name": "1990",
-            "value": 26424,
-            "extra": {
-              "code": "uk"
-            }
-          }
-        ]
-      }
-    ]
-  ;
-data: any[] = [
-  {
-    "name": "Alimentacion",
-    "value": Math.floor(Math.random() * (10000000 - 1000000 + 1)) + 1000000
-  },
-  {
-    "name": "veterinario",
-    "value": Math.floor(Math.random() * (10000000 - 1000000 + 1)) + 1000000
-  },
-  {
-    "name": "Casa",
-    "value": Math.floor(Math.random() * (10000000 - 1000000 + 1)) + 1000000
-  },
-  {
-    "name": "Transporte",
-    "value": Math.floor(Math.random() * (10000000 - 1000000 + 1)) + 1000000
-},
-{
-  "name": "Entretenimiento",
-  "value": Math.floor(Math.random() * (10000000 - 1000000 + 1)) + 1000000
-},
-{
-  "name": "Salud",
-  "value": Math.floor(Math.random() * (10000000 - 1000000 + 1)) + 1000000
-},
-{
-  "name": "Educación",
-  "value": Math.floor(Math.random() * (10000000 - 1000000 + 1)) + 1000000
-},
-{
-  "name": "Ropa",
-  "value": Math.floor(Math.random() * (10000000 - 1000000 + 1)) + 1000000
-},
-{
-  "name": "Tecnología",
-  "value": Math.floor(Math.random() * (10000000 - 1000000 + 1)) + 1000000
-},
-{
-  "name": "Viajes",
-  "value": Math.floor(Math.random() * (10000000 - 1000000 + 1)) + 1000000
-},
-{
-  "name": "Seguros",
-  "value": Math.floor(Math.random() * (10000000 - 1000000 + 1)) + 1000000
-},
-{
-  "name": "Impuestos",
-  "value": Math.floor(Math.random() * (10000000 - 1000000 + 1)) + 1000000
-},
-{
-  "name": "Regalos",
-  "value": Math.floor(Math.random() * (10000000 - 1000000 + 1)) + 1000000
-},
-{
-  "name": "Deudas",
-  "value": Math.floor(Math.random() * (10000000 - 1000000 + 1)) + 1000000
-},
-{
-  "name": "Inversiones",
-  "value": Math.floor(Math.random() * (10000000 - 1000000 + 1)) + 1000000
-},
-{
-  "name": "Otros",
-  "value": Math.floor(Math.random() * (10000000 - 1000000 + 1)) + 1000000
-}
-
-
-];
-
-constructor(private http:HttpClient, private platform: Platform, private userService: UserService ) { }
-
-ngOnInit() {
-  this.changeLegendPosition(false);
-  this.handleScreenSizeChange();
-  this.usuario = this.userService.getUsuario();
-  console.log('usu:', this.usuario.dni);
-}
-handleRefresh(event: any) {
-  // Lógica para actualizar los datos aquí
-  this.generateRandomData();
-
-  // Simular una demora de 1 segundo para el efecto visual
-  setTimeout(() => {
-    // Finalizar el refresco
-    event.target.complete();
-  }, 1000);
-}
-
-generateRandomData() {
-  // Generar los números aleatorios para actualizar los datos
-  this.data = [
-    {
-      "name": "Alimentacion",
-      "value": Math.floor(Math.random() * (10000000 - 1000000 + 1)) + 1000000
-    },
-    {
-      "name": "veterinario",
-      "value": Math.floor(Math.random() * (10000000 - 1000000 + 1)) + 1000000
-    },
-    {
-      "name": "Casa",
-      "value": Math.floor(Math.random() * (10000000 - 1000000 + 1)) + 1000000
-    }
-  ];
-}
-
-
-@HostListener('window:resize', ['$event'])
-onResize(event: any) {
- this.handleScreenSizeChange();
-}
-handleScreenSizeChange() {
-  const width = this.platform.width();
-  const height = this.platform.height();
-  console.log('Width:', width, 'Height:', height);
-  if(width>height){
-      this.view = [0.679 * width,0.379 *  height];
-  }
-  else{
-      this.view = [0.6795 * width,0.3795 *  height];
-  }
-}
-changeLegendPosition(defaultValue = true) {
-  this.legendPosition = defaultValue ? LegendPosition.Right : LegendPosition.Below;
-  this.below = !defaultValue;
-  
-}
-
-insertarDatos() {
-  // Datos para insertar
-  const datos = {
-    nombre: this.nombre,
-    email: this.email
-    
+  view: any;
+  legendPosition: LegendPosition = LegendPosition.Right;
+  below: boolean = false;
+  datos_salario_ahorros: any[] = [];
+  datos_gastos: any[] = [];
+  datos_anuales: any[] = [];
+  datos_gauge: any[] = [];
+  datos_ahorros_gastos: any[] = [];
+  customColorScheme = {
+    domain: ['#FF0000', '#FF6666']
   };
-  if (!this.nombre || !this.email) {
-    console.error('Error: Datos de nombre y/o correo no especificados.');
-    return;
-  }
+  customColorgastos = {
+    domain: ['#FF5733','#4CAF50']
+  };
 
-  const url = 'http://192.168.1.247/prueba.php';
+  data: any[] = [];
 
-    // Realizar la solicitud POST para insertar datos
-    this.http.post(url, datos)
-      .subscribe((respuesta) => {
-        console.log('Inserción exitosa:', respuesta);
-        // Aquí puedes agregar cualquier otra lógica que desees después de la inserción exitosa
-      }, (error) => {
-        console.error('Error al insertar datos:', error);
-        // Aquí puedes manejar el error de manera adecuada
-      });
-  }
+  constructor(private http: HttpClient, private platform: Platform, private userService: UserService, private loadingCtrl: LoadingController,
+    private alertController: AlertController) { }
 
-  meses: string[] = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-  anios: number[] = [2022, 2023, 2024]; // Puedes generar dinámicamente esta lista si es necesario
-  
-  mesSeleccionado: string = this.meses[new Date().getMonth()];
+  mesSeleccionado: number = new Date().getMonth() + 1;
   anioSeleccionado: number = new Date().getFullYear();
 
-  actualizarGrafico() {
+  ngOnInit() {
+    this.changeLegendPosition(false);
+    this.handleScreenSizeChange();
+    this.usuario = this.userService.getUsuario();
+    console.log('usu:', this.usuario.dni);
     console.log('Mes seleccionado:', this.mesSeleccionado);
     console.log('Año seleccionado:', this.anioSeleccionado);
+    this.Estadistica1();
+    this.Estadistica_Anual();
+    this.FormatearParaGauge();
+    console.log('ESTADISTICA 1 :', this.data);
+    console.log('ESTADISTICA 2 :', this.datos_anuales);
+    console.log('Datos anuales:', this.datos_anuales);
+
+    this.presentAlert('Éxito', 'Los registros se han cargado correctamente.');
   }
-  
+  handleRefresh(event: any) {
+
+    this.Estadistica1();
+    this.Estadistica_Anual();
+    this.FormatearParaGauge();
+
+    setTimeout(() => {
+      // Finalizar el refresco
+      event.target.complete();
+    }, 1000);
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.handleScreenSizeChange();
+  }
+  handleScreenSizeChange() {
+    const width = this.platform.width();
+    const height = this.platform.height();
+    console.log('Width:', width, 'Height:', height);
+    if (width > height) {
+      this.view = [0.679 * width, 0.379 * height];
+    }
+    else {
+      this.view = [0.6795 * width, 0.3795 * height];
+    }
+  }
+  changeLegendPosition(defaultValue = true) {
+    this.legendPosition = defaultValue ? LegendPosition.Right : LegendPosition.Below;
+    this.below = !defaultValue;
+
+  }
+
+  meses: { nombre: string, valor: number }[] = [
+    { nombre: 'Enero', valor: 1 },
+    { nombre: 'Febrero', valor: 2 },
+    { nombre: 'Marzo', valor: 3 },
+    { nombre: 'Abril', valor: 4 },
+    { nombre: 'Mayo', valor: 5 },
+    { nombre: 'Junio', valor: 6 },
+    { nombre: 'Julio', valor: 7 },
+    { nombre: 'Agosto', valor: 8 },
+    { nombre: 'Septiembre', valor: 9 },
+    { nombre: 'Octubre', valor: 10 },
+    { nombre: 'Noviembre', valor: 11 },
+    { nombre: 'Diciembre', valor: 12 }
+  ];
+  anios: number[] = [2022, 2023, 2024];
+
+
+  async actualizarGrafico() {
+    console.log('Mes seleccionado:', this.mesSeleccionado);
+    console.log('Año seleccionado:', this.anioSeleccionado);
+    this.Estadistica1();
+    this.Estadistica_Anual();
+  }
+
+  async Estadistica1() {
+    const mes = this.mesSeleccionado;
+    const anio = this.anioSeleccionado;
+
+    const body = { year: anio, month: mes, dni: this.userService.getUsuario().dni };
+
+    this.http.get<any>('http://192.168.1.247/estadisticas.php?query=estadistica1', { params: body }).subscribe(
+      async (response) => {
+        console.log('Respuesta del servidor:', response);
+        console.log('dnipasado:', this.userService.getUsuario().dni);
+
+        if (response != null && response.length > 0) {
+          this.data = response;
+          this.datos_salario_ahorros = this.filtrarDatos(response);
+
+          const sumaGastos = response.reduce((total: number, item: any) => {
+          
+            if (item.name !== 'Salario Mensual' && item.name !== 'Ahorros e Inversiones') {
+              total += parseFloat(item.value); // Sumar el valor como un número
+            }
+            return total;
+          }, 0);
+
+          this.datos_salario_ahorros.push({ name: 'Gastos', value: sumaGastos.toFixed(2) });
+          this.datos_gastos = this.filtrarGastos(response);
+
+        } else {
+          this.presentAlert('Información', 'No existen registros a esa fecha.');
+          this.data = [];
+          this.datos_salario_ahorros = [];
+          this.datos_gastos = [];
+        }
+      },
+      (error) => {
+        this.presentAlert('Error', 'Hubo un error al procesar la solicitud.');
+      }
+    );
+  }
+
+  filtrarDatos(data: any[]) {
+    return data.filter(item => item.name === "Ahorros e Inversiones" || item.name === "Salario Mensual");
+  }
+  filtrarGastos(data: any[]) {
+    return data.filter(item => item.name !== "Ahorros e Inversiones" && item.name !== "Salario Mensual");
+  }
+
+  async Estadistica_Anual() {
+    const anio = this.anioSeleccionado;
+    const dni = this.userService.getUsuario().dni;
+
+    const url = `http://192.168.1.247/estadisticas.php`;
+
+    const params = new HttpParams()
+      .set('query', 'estadisticasanuales')
+      .set('year', anio)
+      .set('dni', dni);
+
+    const nombresMeses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+
+    this.http.get<any[]>(url, { params }).subscribe(
+      (response) => {
+        if (response != null && response.length > 0) {
+          const data2 = Array.from({ length: 12 }, (_, i) => {
+            const mes = response.find(item => item.MES === i + 1);
+            const gastos = mes ? parseFloat(mes.GASTOS) : 0;
+            const ingresos = mes ? parseFloat(mes.INGRESOS_AHORROS) : 0;
+            return {
+              name: nombresMeses[i],
+              series: [
+                { name: 'gastos', value: gastos, extra: { code: 'gastos' } },
+                { name: 'ingresos', value: ingresos, extra: { code: 'ingresos' } }
+              ]
+            };
+          });
+
+          this.datos_anuales = data2;
+          console.log('Datos anuales:', this.datos_anuales);
+          const totalGastos = response.reduce((total, item) => total + parseFloat(item.GASTOS), 0);
+          const totalIngresosAhorros = response.reduce((total, item) => total + parseFloat(item.INGRESOS_AHORROS), 0);
+          // Almacenar los totales en datos_ahorros_gastos
+          this.datos_ahorros_gastos = [
+            { name: 'Total de gastos anuales', value: totalGastos },
+            { name: 'Total de ingresos/ahorros anuales', value: totalIngresosAhorros }
+          ];
+
+        } else {
+          this.datos_anuales = [];
+          this.datos_ahorros_gastos = [];
+          return;
+        }
+
+      },
+      (error) => {
+        this.presentAlert('Error', 'Hubo un error al cargar los datos.');
+      }
+    );
+  }
+
+  async FormatearParaGauge() {
+    const anio = this.anioSeleccionado;
+    const dni = this.userService.getUsuario().dni;
+
+    const url = `http://192.168.1.247/estadisticas.php`;
+
+    const params = new HttpParams()
+      .set('query', 'estadisticasanuales')
+      .set('year', anio)
+      .set('dni', dni);
+
+    this.http.get<any[]>(url, { params }).subscribe(
+      (response) => {
+        if (response != null && response.length > 0) {
+          this.datos_gauge = response.map(item => ({
+            name: `Mes ${item.MES}`,
+            value: parseFloat(item.GASTOS),
+            extra: {}
+          }));
+        }
+        else {
+
+          this.datos_gauge = [];
+          return;
+        }
+        console.log('Datos para el gauge:', this.datos_gauge);
+      },
+      (error) => {
+        this.presentAlert('Error', 'Hubo un error al cargar los datos para el gauge.');
+      }
+    );
+  }
+
+
+
+  async presentAlert(title: string, message: string) {
+    const alert = await this.alertController.create({
+      header: title,
+      message: message,
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
+
 
 }

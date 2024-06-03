@@ -18,7 +18,7 @@ export class PieChartComponent implements OnInit {
   showLegend: boolean = true;
   showLabels: boolean = false;
   @Input() view: any;
-  @Input() legendPosition: any = LegendPosition.Below;
+  @Input() legendPosition: any = LegendPosition.Right;
   single: any[] = [];
   @Input('data') set setData(data: any[]) {
     this.single = data;
@@ -27,7 +27,7 @@ export class PieChartComponent implements OnInit {
   @Input() gradient: boolean = true;  // Add this line
   @Input() isDoughnut: boolean = false;  // Add this line
 
-  colorScheme: any = {
+  @Input() colorScheme: any = {
     domain: ['#FF5733', '#FF8C00', '#FFA500', '#FFD700', '#FF6347', '#FF4500']
   };
 
@@ -48,4 +48,5 @@ export class PieChartComponent implements OnInit {
   onDeactivate(event: any) {
     console.log('Deactivate:', event);
   }
+  
 }

@@ -20,7 +20,7 @@ export class TreeMapChartComponent  implements OnInit {
  }
 
  colorScheme: any = {
-   domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+  domain: ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf']
  };
 
  constructor() { }

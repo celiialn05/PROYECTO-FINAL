@@ -18,18 +18,18 @@ export class GroupedVerticalChartComponent  implements OnInit {
  
   gradient: boolean = true;
   showXAxis: boolean = true;
-  showYAxis: boolean = true;
-  showXAxisLabel: boolean = true;
+  showYAxis: boolean = false;
+  showXAxisLabel: boolean = false;
   showYAxisLabel: boolean = true;
   xAxisLabel: string = 'X Axis';
   yAxisLabel: string = 'Y Axis';
   legendTitle: string = 'Legend';
-  showLegend: boolean = true;
+  showLegend: boolean = false;
   showLabels: boolean = true;
   animations: boolean = true;
 
   colorScheme: any = {
-    domain: ['#FF5733', '#FF8C00', '#FFA500', '#FFD700', '#FF6347', '#FF4500']
+    domain: ['#FF5733', '#4CAF50']
   };
 
   constructor() {}

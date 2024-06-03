@@ -13,13 +13,13 @@ export class VerticalBarChartComponent  implements OnInit {
 showXAxis = true;
 showYAxis = false;
 gradient = true;
-showLegend = false;
+showLegend = true;
 showXAxisLabel = true;
 xAxisLabel = '';
 showYAxisLabel = true;
 yAxisLabel = 'Euros';
 @Input() view: any;
-@Input() legendPosition: any = LegendPosition.Below;
+@Input() legendPosition: any = LegendPosition.Right;
 single: any[] = [];
 @Input('data') set setData(data: any[]) {
   this.single = data;
