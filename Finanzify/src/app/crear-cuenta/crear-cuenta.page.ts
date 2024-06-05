@@ -99,12 +99,13 @@ export class CrearCuentaPage implements OnInit {
     }
 
     const formData = new FormData();
+    formData.append('dni', dni);
+    formData.append('contrasena', contrasena);
     formData.append('nombre', nombre);
     formData.append('apellido', apellidos);
     formData.append('edad', edad);
     formData.append('email', email);
-    formData.append('dni', dni);
-    formData.append('contrasena', contrasena);
+    
 
     if (this.selectedFile) {
       formData.append('imagen', this.selectedFile, this.selectedFile.name);

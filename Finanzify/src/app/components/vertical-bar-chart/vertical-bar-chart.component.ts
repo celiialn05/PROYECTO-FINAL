@@ -13,7 +13,7 @@ export class VerticalBarChartComponent  implements OnInit {
 showXAxis = true;
 showYAxis = false;
 gradient = true;
-showLegend = true;
+showLegend = false;
 showXAxisLabel = true;
 xAxisLabel = '';
 showYAxisLabel = true;

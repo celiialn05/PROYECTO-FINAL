@@ -10,38 +10,27 @@
     </ion-card-header>
     <ion-card-content>
       <ion-item>
-        <ion-label position="floating">Correo electronico</ion-label>
-        <ion-input type="email" placeholder="Ejem. 12345678A"></ion-input>
+        <ion-label position="floating">Correo electrónico</ion-label>
+        <ion-input type="email" placeholder="Ejem. correo@example.com" [(ngModel)]="correo"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">DNI</ion-label>
-        <ion-input type="text" placeholder="Ejem. 12345678A" ></ion-input>
+        <ion-input type="text" placeholder="Ejem. 12345678A" [(ngModel)]="dni"></ion-input>
       </ion-item>
-      <ion-item>
-        <ion-label position="floating">Contraseña</ion-label>
-        <ion-input type="password" placeholder="Ejem. 12345678A"></ion-input>
-      </ion-item>
-      </ion-card-content>
+    </ion-card-content>
   </ion-card>
-  <ion-card>
+  <ion-card *ngFor="let pregunta of preguntas">
     <ion-card-header>
-      <ion-card-title> Preguntas de seguridad</ion-card-title>
+      <ion-card-title>Pregunta {{ pregunta.id }}</ion-card-title>
+      <ion-card-title>{{ pregunta.pregunta }}</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <ion-item>
-        <ion-label position="floating">Correo electronico</ion-label>
-        <ion-input type="email" placeholder="Ejem. 12345678A"></ion-input>
+        <ion-label>Respuesta</ion-label>
+        <ion-input type="text" placeholder="Respuesta" [(ngModel)]="respuestas[pregunta.id]"></ion-input>
       </ion-item>
-      <ion-item>
-        <ion-label position="floating">DNI</ion-label>
-        <ion-input type="text" placeholder="Ejem. 12345678A" ></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Contraseña</ion-label>
-        <ion-input type="password" placeholder="Ejem. 12345678A"></ion-input>
-      </ion-item>
-      </ion-card-content>
+    </ion-card-content>
   </ion-card>
-  <ion-button expand="block" class = "custom-orange" >Enviar Respuestas</ion-button>
+  <ion-button expand="block" class="custom-orange" (click)="comprobarRespuestas()">Enviar Respuestas</ion-button>
 
 </ion-content>

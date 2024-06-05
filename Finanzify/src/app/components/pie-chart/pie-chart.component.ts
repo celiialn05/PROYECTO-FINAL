@@ -18,7 +18,7 @@ export class PieChartComponent implements OnInit {
   showLegend: boolean = true;
   showLabels: boolean = false;
   @Input() view: any;
-  @Input() legendPosition: any = LegendPosition.Right;
+  @Input() legendPosition: any = LegendPosition.Below;
   single: any[] = [];
   @Input('data') set setData(data: any[]) {
     this.single = data;

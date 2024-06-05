@@ -48,7 +48,11 @@ export const routes: Routes = [
   {
     path: 'modificar-cuenta',
     loadComponent: () => import('./modificar-cuenta/modificar-cuenta.page').then( m => m.ModificarCuentaPage)
+  },  {
+    path: 'cambiar-contrasena',
+    loadComponent: () => import('./cambiar-contrasena/cambiar-contrasena.page').then( m => m.CambiarContrasenaPage)
   },
+
 
 
 ];

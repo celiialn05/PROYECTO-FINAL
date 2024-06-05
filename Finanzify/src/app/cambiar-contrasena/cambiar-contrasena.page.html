@@ -1,0 +1,29 @@
+<ion-content [fullscreen]="true" class="ion-padding">
+
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Cambiar Contraseña</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="container">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Cambiar Contraseña</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-item>
+          <ion-label position="floating">Nueva Contraseña</ion-label>
+          <ion-input type="password" [(ngModel)]="nuevaContrasena"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Repetir Contraseña</ion-label>
+          <ion-input type="password" [(ngModel)]="repetirContrasena"></ion-input>
+        </ion-item>
+        <ion-button expand="full" (click)="cambiarContrasena()" [disabled]="!nuevaContrasena || !repetirContrasena || nuevaContrasena !== repetirContrasena">Cambiar Contraseña</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+</ion-content>

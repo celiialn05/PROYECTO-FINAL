@@ -24,8 +24,8 @@ import { Router } from '@angular/router';
   templateUrl: './preguntas-seguridad.page.html',
   styleUrls: ['./preguntas-seguridad.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
-  //imports: [IonicModule, CommonModule, FormsModule,NgClass,IonGrid,IonCol,IonRow,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList,IonToolbar,IonTitle,IonContent,IonCard,IonCardHeader,IonCardTitle,PieGridComponent]
+  //imports: [IonicModule, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule,NgClass,IonGrid,IonCol,IonRow,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList,IonToolbar,IonTitle,IonContent,IonCard,IonCardHeader,IonCardTitle,PieGridComponent]
 
 })
 export class PreguntasSeguridadPage implements OnInit {
@@ -45,7 +45,7 @@ export class PreguntasSeguridadPage implements OnInit {
   }
 
   getPreguntasSeguridad() {
-    this.http.get<any[]>('http://192.168.1.247/preguntas-seguridad.php?query=preguntas').subscribe(
+    this.http.get<any[]>('https://finanzify.sytes.net/preguntas-seguridad.php?query=preguntas').subscribe(
       data => {
         this.preguntas = data.map(item => new Pregunta(item.id, item.pregunta));
         this.preguntas.forEach(pregunta => {
@@ -60,7 +60,7 @@ export class PreguntasSeguridadPage implements OnInit {
   
   enviarRespuestas() {
 
-    const url = 'http://192.168.1.247/preguntas-seguridad.php?query=respuestas';
+    const url = 'https://finanzify.sytes.net/preguntas-seguridad.php?query=respuestas';
     const body = {
       dni:  this.userService.getUsuario().dni,
       respuestas: this.respuestas

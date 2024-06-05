@@ -39,6 +39,7 @@ export class DashboardPage implements OnInit {
   datos_anuales: any[] = [];
   datos_gauge: any[] = [];
   datos_ahorros_gastos: any[] = [];
+  data: any[] = [];
   customColorScheme = {
     domain: ['#FF0000', '#FF6666']
   };
@@ -46,7 +47,7 @@ export class DashboardPage implements OnInit {
     domain: ['#FF5733','#4CAF50']
   };
 
-  data: any[] = [];
+  
 
   constructor(private http: HttpClient, private platform: Platform, private userService: UserService, private loadingCtrl: LoadingController,
     private alertController: AlertController) { }
@@ -86,6 +87,11 @@ export class DashboardPage implements OnInit {
   onResize(event: any) {
     this.handleScreenSizeChange();
   }
+  changeLegendPosition(defaultValue = true) {
+    this.legendPosition = defaultValue ? LegendPosition.Right : LegendPosition.Below;
+    this.below = !defaultValue;
+
+  }
   handleScreenSizeChange() {
     const width = this.platform.width();
     const height = this.platform.height();
@@ -97,11 +103,7 @@ export class DashboardPage implements OnInit {
       this.view = [0.6795 * width, 0.3795 * height];
     }
   }
-  changeLegendPosition(defaultValue = true) {
-    this.legendPosition = defaultValue ? LegendPosition.Right : LegendPosition.Below;
-    this.below = !defaultValue;
-
-  }
+  
 
   meses: { nombre: string, valor: number }[] = [
     { nombre: 'Enero', valor: 1 },
@@ -145,7 +147,7 @@ export class DashboardPage implements OnInit {
           const sumaGastos = response.reduce((total: number, item: any) => {
           
             if (item.name !== 'Salario Mensual' && item.name !== 'Ahorros e Inversiones') {
-              total += parseFloat(item.value); // Sumar el valor como un número
+              total += parseFloat(item.value); 
             }
             return total;
           }, 0);
@@ -228,9 +230,7 @@ export class DashboardPage implements OnInit {
   async FormatearParaGauge() {
     const anio = this.anioSeleccionado;
     const dni = this.userService.getUsuario().dni;
-
     const url = `http://192.168.1.247/estadisticas.php`;
-
     const params = new HttpParams()
       .set('query', 'estadisticasanuales')
       .set('year', anio)
