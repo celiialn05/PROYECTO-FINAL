@@ -6,7 +6,7 @@ import { RouterLink, RouterModule } from '@angular/router';
 import { moon, sunnyOutline } from 'ionicons/icons';
 import { ThemeService } from '../services/theme.service';
 import { IonButton, IonButtons, IonCol, IonFab, IonFabButton,AlertController,IonToolbar, IonFabList, IonFooter, IonGrid, IonHeader, IonItemDivider, IonCardHeader,IonRow, IonSpinner,IonTitle, IonCard,IonTextarea,IonCardTitle,IonBadge,IonContent,IonList,IonItem,IonInput,IonSelect, LoadingController } from '@ionic/angular/standalone';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { UserService } from '../services/UserService';
 import { StorageService } from '../services/StorageService';
@@ -23,33 +23,48 @@ export class CambiarContrasenaPage implements OnInit {
   repetirContrasena!: string;
   usuario: any;
 
-  constructor(private http: HttpClient, private userService: UserService, private alertController: AlertController) {}
+  constructor(
+     private http: HttpClient,
+     private userService: UserService, 
+     private alertController: AlertController, 
+     private router: Router
+    ) {}
 
   ngOnInit() {
     this.usuario = this.userService.getUsuario();
+    console.log('Usuario cambiar contrasena :', this.userService.getUsuario().dni);
   }
 
   async cambiarContrasena() {
     if (this.nuevaContrasena !== this.repetirContrasena) {
-      const alert = await this.alertController.create({
-        header: 'Error',
-        message: 'Las contraseñas no coinciden.',
-        buttons: ['OK']
-      });
-      await alert.present();
-      return;
+        const alert = await this.alertController.create({
+            header: 'Error',
+            message: 'Las contraseñas no coinciden.',
+            buttons: ['OK']
+        });
+        await alert.present();
+        return;
     }
 
-    const datos = {
-      dni: this.usuario.dni,
-      contrasena: this.nuevaContrasena
-    };
+    const datos = new URLSearchParams();
+    datos.set('dni', this.userService.getUsuario().dni);
+    datos.set('contrasena', this.nuevaContrasena);
 
-    this.http.post('http://192.168.1.247/cambiar_contrasena.php', datos)
-      .subscribe(response => {
-        console.log(response);
-      }, error => {
-        console.error(error);
-      });
-  }
+    const httpOptions = {
+        headers: new HttpHeaders({
+            'Content-Type': 'application/x-www-form-urlencoded'
+        })
+    };
+/*
+    Petición POST para cambiar la contraseña del usuario
+*/
+    this.http.post('http://192.168.1.247/cambiar_contrasena.php', datos.toString(), httpOptions)
+        .subscribe(response => {
+            console.log(response);
+            console.log('Contraseña cambiada correctamente');
+            this.router.navigate(['/login']);
+        }, error => {
+            console.error(error);
+        });
+}
 }

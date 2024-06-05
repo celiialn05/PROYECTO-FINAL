@@ -1,53 +1,56 @@
 <ion-content [fullscreen]="true">
   <ion-grid>
+    <ion-row>
+      <ion-col size="12" class="custom-button-center">
+        <img src="assets\modificarcredenciales.png" alt="Logo de la aplicación" class="custom-button-center">
+      </ion-col>
+    </ion-row>
+
     <!-- Campos de datos personales -->
-    <ion-col size="12">
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>Datos Personales</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <ion-item>
-            <ion-label position="floating">Nombre</ion-label>
-            <ion-input id="nombre" type="text" [(ngModel)]="usuario.nombre"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">Apellidos</ion-label>
-            <ion-input id="apellidos" type="text" [(ngModel)]="usuario.apellidos"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">Edad</ion-label>
-            <ion-input id="edad" type="number" [(ngModel)]="usuario.edad"></ion-input>
-          </ion-item>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
+    <ion-row>
+      <ion-col size="12">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Datos Personales</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-item>
+              <ion-label position="floating">Nombre</ion-label>
+              <ion-input id="nombre" type="text" [(ngModel)]="usuario.nombre" [placeholder]="usuario.nombre"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Apellidos</ion-label>
+              <ion-input id="apellidos" type="text" [(ngModel)]="usuario.apellidos" [placeholder]="usuario.apellidos"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Edad</ion-label>
+              <ion-input id="edad" type="number" [(ngModel)]="usuario.edad" [placeholder]="usuario.edad"></ion-input>
+            </ion-item>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
     <!-- Campos de datos de la cuenta -->
-    <ion-col size="12">
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>Datos de la cuenta</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <ion-item>
-            <ion-label position="floating">Email</ion-label>
-            <ion-input id="email" type="email" [(ngModel)]="usuario.email"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">DNI</ion-label>
-            <ion-input id="dni" type="text" [(ngModel)]="usuario.dni"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">Contraseña</ion-label>
-            <ion-input id="contrasena" type="password" [(ngModel)]="usuario.contrasena"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">Repetir Contraseña</ion-label>
-            <ion-input id="repetirContrasena" type="password" [(ngModel)]="usuario.repetirContrasena"></ion-input>
-          </ion-item>
-          <ion-button expand="block" class="custom-black" (click)="modificarUsuario()">Guardar Cambios</ion-button>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
+    <ion-row>
+      <ion-col size="12">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Datos de la cuenta</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-item>
+              <ion-label position="floating">Email</ion-label>
+              <ion-input id="email" type="email" [(ngModel)]="usuario.email" [placeholder]="usuario.email"></ion-input>
+            </ion-item>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <!-- Botón para guardar cambios -->
+    <ion-row>
+      <ion-col size="12">
+        <ion-button expand="full" (click)="modificarUsuario()">Guardar Cambios</ion-button>
+      </ion-col>
+    </ion-row>
   </ion-grid>
 </ion-content>

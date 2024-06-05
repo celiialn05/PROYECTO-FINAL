@@ -21,37 +21,18 @@ import { RouterLink, RouterModule } from '@angular/router';
 })
 export class PrincipalPage implements OnInit {
   usuario: any;
-  imagenUrl: SafeUrl | undefined;
-
-  constructor(private themeService: ThemeService,private userService: UserService, private http: HttpClient, private sanitizer: DomSanitizer ,) {}
+ 
+  constructor(
+    private themeService: ThemeService,
+    private userService: UserService,
+    private http: HttpClient,
+    private sanitizer: DomSanitizer ,) {}
 
   ngOnInit() {
     this.usuario = this.userService.getUsuario();
-    if (this.usuario) {
-      this.loadUserImage(this.usuario.dni);
-      console.log('Usuario pito :', this.usuario.dni );
-    }
   }
   toggleDarkMode() {
     this.themeService.toggleDarkMode();
   }
-  loadUserImage(dni: string) {
-    this.http
-      .get('http://192.168.1.247/principal.php', {
-        params: { dni: dni },
-        responseType: 'blob',
-      })
-      .subscribe(
-        (blob: Blob) => {
-          const reader = new FileReader();
-          reader.onload = () => {
-            this.imagenUrl = reader.result as string;
-          };
-          reader.readAsDataURL(blob);
-        },
-        (error) => {
-          console.error('Error al cargar la imagen:', error);
-        }
-      );
-  }
+ 
 }

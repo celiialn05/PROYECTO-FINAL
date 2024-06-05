@@ -27,55 +27,67 @@ import { UserService } from '../services/UserService';
   //imports: [IonicModule, CommonModule, FormsModule,VerticalBarChartComponent,NgClass,IonGrid,IonCol,IonRow,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList,IonToolbar,IonTitle,IonContent,IonCard,IonCardHeader,IonCardTitle,PieGridComponent,PieChartComponent,TreeMapChartComponent,NumberCardChartComponent,GaugeChartComponent,GroupedVerticalChartComponent]
 })
 export class DashboardPage implements OnInit {
+
+  /*Declaraciones*/
   usuario: any;
-  pruebas: any = [];
-  nombre: string = '';
-  email: string = '';
-  view: any;
-  legendPosition: LegendPosition = LegendPosition.Right;
-  below: boolean = false;
+  mesSeleccionado: number = new Date().getMonth() + 1;
+  anioSeleccionado: number = new Date().getFullYear();
   datos_salario_ahorros: any[] = [];
   datos_gastos: any[] = [];
   datos_anuales: any[] = [];
   datos_gauge: any[] = [];
   datos_ahorros_gastos: any[] = [];
   data: any[] = [];
+  data_mes_anterior: any[] = [];
+  datos_salario_ahorros_mes_anterior: any[] = [];
+  datos_gastos_mes_anterior: any[] = [];
+
   customColorScheme = {
     domain: ['#FF0000', '#FF6666']
   };
   customColorgastos = {
     domain: ['#FF5733','#4CAF50']
   };
+  view: any;
+  legendPosition: LegendPosition = LegendPosition.Right;
+  below: boolean = false;
+  meses: { nombre: string, valor: number }[] = [
+    { nombre: 'Enero', valor: 1 },
+    { nombre: 'Febrero', valor: 2 },
+    { nombre: 'Marzo', valor: 3 },
+    { nombre: 'Abril', valor: 4 },
+    { nombre: 'Mayo', valor: 5 },
+    { nombre: 'Junio', valor: 6 },
+    { nombre: 'Julio', valor: 7 },
+    { nombre: 'Agosto', valor: 8 },
+    { nombre: 'Septiembre', valor: 9 },
+    { nombre: 'Octubre', valor: 10 },
+    { nombre: 'Noviembre', valor: 11 },
+    { nombre: 'Diciembre', valor: 12 }
+  ];
+  anios: number[] = [2022, 2023, 2024];
 
-  
-
-  constructor(private http: HttpClient, private platform: Platform, private userService: UserService, private loadingCtrl: LoadingController,
-    private alertController: AlertController) { }
-
-  mesSeleccionado: number = new Date().getMonth() + 1;
-  anioSeleccionado: number = new Date().getFullYear();
+  constructor(
+    private http: HttpClient,
+    private platform: Platform,
+    private userService: UserService,
+    private alertController: AlertController
+  ) { }
 
   ngOnInit() {
     this.changeLegendPosition(false);
     this.handleScreenSizeChange();
     this.usuario = this.userService.getUsuario();
-    console.log('usu:', this.usuario.dni);
-    console.log('Mes seleccionado:', this.mesSeleccionado);
-    console.log('Año seleccionado:', this.anioSeleccionado);
-    this.Estadistica1();
+    this.Estadistica_mes_actual();
+    this.Estadistica_mes_anterior();
     this.Estadistica_Anual();
     this.FormatearParaGauge();
-    console.log('ESTADISTICA 1 :', this.data);
-    console.log('ESTADISTICA 2 :', this.datos_anuales);
-    console.log('Datos anuales:', this.datos_anuales);
-
-    this.presentAlert('Éxito', 'Los registros se han cargado correctamente.');
+    this.presentAlert('Éxito', 'Dashboard cargada correctamente');
   }
+
   handleRefresh(event: any) {
 
-    this.Estadistica1();
-    this.Estadistica_Anual();
-    this.FormatearParaGauge();
+    this.actualizarGrafico();
 
     setTimeout(() => {
       // Finalizar el refresco
@@ -104,32 +116,17 @@ export class DashboardPage implements OnInit {
     }
   }
   
-
-  meses: { nombre: string, valor: number }[] = [
-    { nombre: 'Enero', valor: 1 },
-    { nombre: 'Febrero', valor: 2 },
-    { nombre: 'Marzo', valor: 3 },
-    { nombre: 'Abril', valor: 4 },
-    { nombre: 'Mayo', valor: 5 },
-    { nombre: 'Junio', valor: 6 },
-    { nombre: 'Julio', valor: 7 },
-    { nombre: 'Agosto', valor: 8 },
-    { nombre: 'Septiembre', valor: 9 },
-    { nombre: 'Octubre', valor: 10 },
-    { nombre: 'Noviembre', valor: 11 },
-    { nombre: 'Diciembre', valor: 12 }
-  ];
-  anios: number[] = [2022, 2023, 2024];
-
-
+  /* Función para refrescar las gráficas */
   async actualizarGrafico() {
     console.log('Mes seleccionado:', this.mesSeleccionado);
     console.log('Año seleccionado:', this.anioSeleccionado);
-    this.Estadistica1();
+    this.Estadistica_mes_actual();
     this.Estadistica_Anual();
+    this.FormatearParaGauge();
+    this.Estadistica_mes_anterior();
   }
 
-  async Estadistica1() {
+  async Estadistica_mes_actual() {
     const mes = this.mesSeleccionado;
     const anio = this.anioSeleccionado;
 
@@ -156,14 +153,13 @@ export class DashboardPage implements OnInit {
           this.datos_gastos = this.filtrarGastos(response);
 
         } else {
-          this.presentAlert('Información', 'No existen registros a esa fecha.');
           this.data = [];
           this.datos_salario_ahorros = [];
           this.datos_gastos = [];
         }
       },
       (error) => {
-        this.presentAlert('Error', 'Hubo un error al procesar la solicitud.');
+        this.presentAlert('Error', 'Hubo un error al procesar la solicitud de estadísca de mes actual.');
       }
     );
   }
@@ -175,6 +171,7 @@ export class DashboardPage implements OnInit {
     return data.filter(item => item.name !== "Ahorros e Inversiones" && item.name !== "Salario Mensual");
   }
 
+  /* Petición para los datos anuales y almacenamiento de los mismos */
   async Estadistica_Anual() {
     const anio = this.anioSeleccionado;
     const dni = this.userService.getUsuario().dni;
@@ -226,6 +223,49 @@ export class DashboardPage implements OnInit {
       }
     );
   }
+    /* Petición para estadísticas del mes anterior */
+  async Estadistica_mes_anterior() {
+    let mes = this.mesSeleccionado - 1; 
+    let anio = this.anioSeleccionado;
+
+    if (mes === 0) {
+        mes = 12;
+        anio -= 1;
+    }
+
+    const body = { year: anio, month: mes, dni: this.userService.getUsuario().dni };
+
+    this.http.get<any>('http://192.168.1.247/estadisticas.php?query=estadistica1', { params: body }).subscribe(
+        async (response) => {
+            console.log('Respuesta del servidor (mes anterior):', response);
+            console.log('DNI pasado:', this.userService.getUsuario().dni);
+
+            if (response != null && response.length > 0) {
+                this.data_mes_anterior = response;
+                this.datos_salario_ahorros_mes_anterior = this.filtrarDatos(response);
+
+                const sumaGastos = response.reduce((total: number, item: any) => {
+                    if (item.name !== 'Salario Mensual' && item.name !== 'Ahorros e Inversiones') {
+                        total += parseFloat(item.value);
+                    }
+                    return total;
+                }, 0);
+
+                this.datos_salario_ahorros_mes_anterior.push({ name: 'Gastos', value: sumaGastos.toFixed(2) });
+                this.datos_gastos_mes_anterior = this.filtrarGastos(response);
+
+            } else {
+                this.data_mes_anterior = [];
+                this.datos_salario_ahorros_mes_anterior = [];
+                this.datos_gastos_mes_anterior = [];
+            }
+        },
+        (error) => {
+            this.presentAlert('Error', 'Hubo un error al procesar la solicitud.');
+        }
+    );
+}
+    /* Petición para estadística gauge */
 
   async FormatearParaGauge() {
     const anio = this.anioSeleccionado;
@@ -257,7 +297,6 @@ export class DashboardPage implements OnInit {
       }
     );
   }
-
 
 
   async presentAlert(title: string, message: string) {

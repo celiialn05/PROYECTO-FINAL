@@ -3,7 +3,7 @@ import { CommonModule, DOCUMENT, NgClass } from '@angular/common';
 import { IonButton, IonButtons, AlertController, IonContent, IonFooter, IonHeader, IonTitle, IonToolbar, IonFabButton, IonItemDivider, IonTextarea, IonFab, IonFabList, IonCard, IonCardHeader, IonCardTitle, IonGrid, IonCol, IonRow, Platform, IonicSlides } from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink, RouterModule } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UserService } from '../services/UserService';
 import { IonicModule } from '@ionic/angular';
 import { Pregunta } from '../preguntas-seguridad/pregunta.model';
@@ -49,20 +49,22 @@ export class RecuperarCuentaPage implements OnInit {
   }
 
   comprobarRespuestas() {
-    // Verificar si el DNI y el correo están completos
     if (!this.dni || !this.correo) {
       this.presentAlert('Advertencia', 'Por favor, complete tanto el DNI como el correo electrónico.');
       return;
     }
-    
-    const respuestasUsuario = Object.values(this.respuestas);
-    const datos = {
-      dni: this.dni,
-      correo: this.correo,
-      respuestas: respuestasUsuario
-    };
   
-    this.http.post<RespuestaServidor>('http://192.168.1.247/preguntas-seguridad.php?query=verificar_respuestas', datos).subscribe(
+    const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
+  
+    const datos = new URLSearchParams();
+    datos.set('dni', this.dni);
+    datos.set('email', this.correo);
+    // Asumiendo que this.respuestas es un objeto con las respuestas
+    Object.entries(this.respuestas).forEach(([key, value]) => {
+      datos.append('respuestas[]', value);
+    });
+  
+    this.http.post<any>('http://192.168.1.247/validar_respuestas.php', datos.toString(), { headers }).subscribe(
       data => {
         if (data.resultado) {
           this.presentAlert('Resultado', data.mensaje);
@@ -72,7 +74,7 @@ export class RecuperarCuentaPage implements OnInit {
           this.UserService.setUsuario(usuario);
           this.router.navigate(['/cambiar-contrasena']);
         } else {
-          this.presentAlert('Resultado', 'Al menos una respuesta es incorrecta.');
+          this.presentAlert('Resultado', 'Algunos datos no coinciden');
         }
       },
       error => {
@@ -81,7 +83,6 @@ export class RecuperarCuentaPage implements OnInit {
       }
     );
   }
-  
   async presentAlert(header: string, message: string) {
     const alert = await this.alertController.create({
       header: header,

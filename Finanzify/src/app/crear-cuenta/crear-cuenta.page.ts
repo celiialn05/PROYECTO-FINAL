@@ -21,7 +21,7 @@ import { UserService } from '../services/UserService';
 export class CrearCuentaPage implements OnInit {
 
   selectedFile: File | null = null;
-  imagenSeleccionada: string = '';
+  imagenSeleccionada: string = 'assets/logo-prototipo.png';  // Imagen por defecto
 
   constructor(
     private http: HttpClient,
@@ -31,6 +31,9 @@ export class CrearCuentaPage implements OnInit {
 
   ngOnInit() { }
 
+
+  /* Métodos para subir una imagen de perfil del usuario simplemente quedaría tratarla desde el lado servidor */
+  /*
   onFileSelected(event: any) {
     const file = event.target.files[0];
 
@@ -53,7 +56,7 @@ export class CrearCuentaPage implements OnInit {
     const fileInput = document.getElementById('imageInput') as HTMLInputElement;
     fileInput.click();
   }
-
+  */
   validarDNI(dni: string): boolean {
     const dniRegex = /^\d{8}[a-zA-Z]$/;
     return dniRegex.test(dni);
@@ -64,7 +67,7 @@ export class CrearCuentaPage implements OnInit {
     return emailRegex.test(email);
   }
 
-    async Registro() {
+  async Registro() {
     const nombre = (document.getElementById('nombre') as HTMLInputElement).value;
     const apellidos = (document.getElementById('apellidos') as HTMLInputElement).value;
     const edad = (document.getElementById('edad') as HTMLInputElement).value;
@@ -73,7 +76,7 @@ export class CrearCuentaPage implements OnInit {
     const contrasena = (document.getElementById('contrasena') as HTMLInputElement).value;
     const repetirContrasena = (document.getElementById('repetirContrasena') as HTMLInputElement).value;
 
-    if (nombre === '' || apellidos === '' || edad === '' || email === '' || dni === '' || contrasena === '' || repetirContrasena === '' || this.selectedFile === null) {
+    if (nombre === '' || apellidos === '' || edad === '' || email === '' || dni === '' || contrasena === '' || repetirContrasena === '') {
       this.presentAlert('Error', 'No puede haber campos vacíos.');
       return;
     }
@@ -91,7 +94,6 @@ export class CrearCuentaPage implements OnInit {
     }
 
     if (contrasena !== repetirContrasena) {
-      console.log('Las contraseñas no coinciden');
       this.presentAlert('Error', 'Las contraseñas no coinciden.');
       (document.getElementById('contrasena') as HTMLInputElement).value = '';
       (document.getElementById('repetirContrasena') as HTMLInputElement).value = '';
@@ -105,18 +107,24 @@ export class CrearCuentaPage implements OnInit {
     formData.append('apellido', apellidos);
     formData.append('edad', edad);
     formData.append('email', email);
-    
 
-    if (this.selectedFile) {
-      formData.append('imagen', this.selectedFile, this.selectedFile.name);
-    }
-    
+    /**
+     *  La base de datos se queda preparada para que si en un futuro se desea subir una imagen de perfil del usuario, se pueda hacer.
+     *  Por ahora, se subirá una imagen por defecto. 
+     *  Dejo comentados los métodos para subir una imagen por si se desea implementar en un futuro.
+     */
+    const defaultImage = 'assets/logo-prototipo.png';
+    const response = await fetch(defaultImage);
+    const blob = await response.blob();
+    const defaultImageFile = new File([blob], 'default_image.png', { type: 'image/png' });
+    formData.append('imagen', defaultImageFile);
+
     this.http.post('http://192.168.1.247/crearcuentas.php', formData)
       .subscribe(response => {
         console.log(response);
         this.presentAlert('Éxito', 'Cuenta creada exitosamente.');
         const usuario = {
-          dni:  (document.getElementById('dni') as HTMLInputElement).value
+          dni: (document.getElementById('dni') as HTMLInputElement).value
         };
         this.UserService.setUsuario(usuario);
         this.router.navigate(['/preguntas-seguridad']);

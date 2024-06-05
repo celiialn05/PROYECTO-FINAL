@@ -14,8 +14,6 @@
 
   <!-- Contenido de la página de Dashboard -->
 
-  <!--IMPORTANTE SWIPER npm install swiper@latest-->
-
   <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
     <ion-refresher-content pullingIcon="arrow-down" pullingText="" refreshingSpinner="circles" refreshingText="">
     </ion-refresher-content>
@@ -38,6 +36,8 @@
 
     <ion-button (click)="actualizarGrafico()" class="full-width-card custom-orange ">Actualizar Gráfico</ion-button>
   </ion-card>
+
+  <!-----------------Slider estadísticas del mes---------------------------------->
 
   <h1 class="titulos-cards">Estadísticas del mes </h1>
   <swiper-container>
@@ -92,41 +92,41 @@
   </swiper-container>
 
 
-
   <h1 class="titulos-cards">Estadísticas del mes anterior </h1>
   <swiper-container>
-
-    <swiper-slide *ngIf="datos_salario_ahorros && datos_salario_ahorros.length > 0">
+    <!-----------------Slider estadísticas del mes anterior------------------------------>
+    <swiper-slide *ngIf=" datos_salario_ahorros_mes_anterior &&  datos_salario_ahorros_mes_anterior.length > 0">
       <ion-card>
         <ion-card-title class="ion-padding ion-padding full-width-card">Salario y ahorros</ion-card-title>
         <ion-card-content class="ion-margin-top" [ngClass]="{'cardContent' : below}">
-          <app-vertical-bar-chart [data]="datos_salario_ahorros"
+          <app-vertical-bar-chart [data]=" datos_salario_ahorros_mes_anterior"
             [legendPosition]="legendPosition"></app-vertical-bar-chart>
         </ion-card-content>
       </ion-card>
     </swiper-slide>
 
-    <swiper-slide *ngIf="datos_gastos && datos_gastos.length > 0">
+    <swiper-slide *ngIf="datos_gastos_mes_anterior && datos_gastos_mes_anterior.length > 0">
       <ion-card>
         <ion-card-title class="ion-padding ion-padding full-width-card">Gastos</ion-card-title>
         <ion-card-content class="ion-margin-top" [ngClass]="{'cardContent' : below}">
-          <app-number-card-chart [data]="datos_gastos" [legendPosition]="legendPosition" [colorScheme]="customColorScheme"></app-number-card-chart>
+          <app-number-card-chart [data]="datos_gastos_mes_anterior" [legendPosition]="legendPosition"
+            [colorScheme]="customColorScheme"></app-number-card-chart>
         </ion-card-content>
       </ion-card>
     </swiper-slide>
 
-    <swiper-slide *ngIf="data && data.length > 0">
+    <swiper-slide *ngIf="data_mes_anterior && data_mes_anterior.length > 0">
       <ion-card>
         <ion-card-title class="ion-padding ion-padding full-width-card">Estadísticas totales</ion-card-title>
         <ion-card-content class="ion-margin-top" [ngClass]="{'cardContent' : below}">
-          <app-pie-chart [data]="data" [legendPosition]="legendPosition" [isDoughnut]="true"></app-pie-chart>
+          <app-pie-chart [data]="data_mes_anterior" [legendPosition]="legendPosition" [isDoughnut]="true"></app-pie-chart>
         </ion-card-content>
       </ion-card>
     </swiper-slide>
 
-    <swiper-slide *ngIf="!(datos_salario_ahorros && datos_salario_ahorros.length > 0) 
-                      && !(datos_gastos && datos_gastos.length > 0) 
-                      && !(data && data.length > 0)">
+    <swiper-slide *ngIf="!(datos_salario_ahorros_mes_anterior && datos_salario_ahorros_mes_anterior.length > 0) 
+                      && !(datos_gastos_mes_anterior && datos_gastos_mes_anterior.length > 0) 
+                      && !(data_mes_anterior && data_mes_anterior.length > 0)">
       <ion-card>
         <ion-card-content class="no-data-content">
           <ion-icon name="alert-circle" class="warning-icon"></ion-icon>
@@ -137,6 +137,7 @@
   </swiper-container>
 
   <h1 class="titulos-cards">Estadísticas anuales </h1>
+  <!-----------------Slider estadísticas anuales------------------------------>
   <swiper-container>
 
     <swiper-slide *ngIf="datos_anuales && datos_anuales.length > 0">
@@ -153,7 +154,8 @@
       <ion-card>
         <ion-card-title class="ion-padding ion-padding full-width-card">Relación Gastos/Ingresos</ion-card-title>
         <ion-card-content class="ion-margin-top" [ngClass]="{'cardContent' : below}">
-          <app-pie-chart [data]="datos_ahorros_gastos" [legendPosition]="legendPosition"  [colorScheme]="customColorgastos"></app-pie-chart>
+          <app-pie-chart [data]="datos_ahorros_gastos" [legendPosition]="legendPosition"
+            [colorScheme]="customColorgastos"></app-pie-chart>
         </ion-card-content>
       </ion-card>
     </swiper-slide>
@@ -167,7 +169,9 @@
       </ion-card>
     </swiper-slide>
 
-    <swiper-slide *ngIf="!datos_anuales || datos_anuales.length === 0">
+    <swiper-slide *ngIf="!(datos_anuales && datos_anuales.length > 0) 
+      && !(datos_ahorros_gastos && datos_ahorros_gastos.length > 0) 
+      && !(datos_gauge && datos_gauge.length > 0)">
       <ion-card>
         <ion-card-content class="no-data-content">
           <ion-icon name="alert-circle" class="warning-icon"></ion-icon>
