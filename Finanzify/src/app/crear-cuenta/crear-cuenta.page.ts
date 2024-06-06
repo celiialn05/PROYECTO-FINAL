@@ -57,6 +57,8 @@ export class CrearCuentaPage implements OnInit {
     fileInput.click();
   }
   */
+
+  //Validaciones para que tengan un formato concreto 
   validarDNI(dni: string): boolean {
     const dniRegex = /^\d{8}[a-zA-Z]$/;
     return dniRegex.test(dni);

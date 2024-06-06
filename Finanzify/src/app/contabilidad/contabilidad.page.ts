@@ -116,7 +116,7 @@ export class ContabilidadPage implements OnInit {
     await alert.present();
   }
 
-
+//para los iconos de las categorías 
   getIconName(categoria: string): string {
     switch (categoria) {
       case 'Vivienda':
