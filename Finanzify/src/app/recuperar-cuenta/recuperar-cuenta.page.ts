@@ -19,13 +19,18 @@ interface RespuestaServidor {
   templateUrl: './recuperar-cuenta.page.html',
   styleUrls: ['./recuperar-cuenta.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, RouterModule,RouterLink]
-  //imports: [IonicModule, CommonModule, FormsModule,NgClass,IonGrid,IonCol,IonRow,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList,IonToolbar,IonTitle,IonContent,IonCard,IonCardHeader,IonCardTitle]
+ // imports: [IonicModule, CommonModule, FormsModule, RouterModule,RouterLink]
+  imports: [IonicModule, CommonModule, FormsModule,NgClass,IonGrid,IonCol,IonRow,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList,IonToolbar,IonTitle,IonContent,IonCard,IonCardHeader,IonCardTitle]
 
 })
 export class RecuperarCuentaPage implements OnInit {
 
-  constructor(private http: HttpClient, private alertController: AlertController, private router: Router , private UserService: UserService) { }
+  constructor(
+    private http: HttpClient,
+    private alertController: AlertController,
+    private router: Router , 
+    private UserService: UserService) { }
+
   preguntas: Pregunta[] = [];
   respuestas: { [key: string]: string } = {}; 
   dni: string = '';
@@ -35,7 +40,7 @@ export class RecuperarCuentaPage implements OnInit {
   }
 
   getPreguntasSeguridad() {
-    this.http.get<any[]>('http://192.168.1.247/preguntas-seguridad.php?query=preguntas').subscribe(
+    this.http.get<any[]>('https://finanzify.sytes.net/preguntas-seguridad.php?query=preguntas').subscribe(
       data => {
         this.preguntas = data.map(item => new Pregunta(item.id, item.pregunta));
         this.preguntas.forEach(pregunta => {
@@ -59,12 +64,13 @@ export class RecuperarCuentaPage implements OnInit {
     const datos = new URLSearchParams();
     datos.set('dni', this.dni);
     datos.set('email', this.correo);
+
     // Asumiendo que this.respuestas es un objeto con las respuestas
     Object.entries(this.respuestas).forEach(([key, value]) => {
       datos.append('respuestas[]', value);
     });
   
-    this.http.post<any>('http://192.168.1.247/validar_respuestas.php', datos.toString(), { headers }).subscribe(
+    this.http.post<any>('https://finanzify.sytes.net/validar_respuestas.php', datos.toString(), { headers }).subscribe(
       data => {
         if (data.resultado) {
           this.presentAlert('Resultado', data.mensaje);

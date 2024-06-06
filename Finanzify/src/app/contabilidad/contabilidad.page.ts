@@ -14,8 +14,8 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './contabilidad.page.html',
   styleUrls: ['./contabilidad.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
-  // imports: [IonicModule, CommonModule, FormsModule,IonGrid,IonCol,IonRow,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList,IonToolbar,IonTitle,IonContent,IonCard,IonCardHeader,IonCardTitle,IonBadge,IonList,IonItem,IonInput,IonSelect]
+  //imports: [IonicModule, CommonModule, FormsModule]
+   imports: [IonicModule, CommonModule, FormsModule,IonGrid,IonCol,IonRow,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList,IonToolbar,IonTitle,IonContent,IonCard,IonCardHeader,IonCardTitle,IonBadge,IonList,IonItem,IonInput,IonSelect]
 })
 export class ContabilidadPage implements OnInit {
   //Declaraciones necesarias
@@ -48,10 +48,9 @@ export class ContabilidadPage implements OnInit {
 
   // Petición para devolver las categorías
   obtenerCategorias() {
-    this.http.get<any[]>("http://192.168.1.247/categorias.php?query=categorias").subscribe(
+    this.http.get<any[]>("https://finanzify.sytes.net/categorias.php?query=categorias").subscribe(
       (response) => {
         this.categorias = response; // Asignar las categorías obtenidas al array
-        console.log('Categorías:', this.categorias);
       },
       (error) => {
         console.error('Error al obtener las categorías:', error);
@@ -62,10 +61,9 @@ export class ContabilidadPage implements OnInit {
   // Petición para devolver los montos
   async obtenerMontos() {
     await this.showLoading()
-    this.http.get<any[]>(`http://192.168.1.247/categorias.php?query=montos&dni=${this.usuario.dni}`).subscribe(
+    this.http.get<any[]>(`https://finanzify.sytes.net/categorias.php?query=montos&dni=${this.usuario.dni}`).subscribe(
       (response) => {
         this.montos = response; // Asignar los montos obtenidos al array
-        console.log('Montos:', this.montos);
         this.loadingCtrl.dismiss();
       },
       (error) => {
@@ -89,9 +87,8 @@ export class ContabilidadPage implements OnInit {
 
     const body = { categoria: this.selectedCategoria, dni: this.usuario.dni, cantidad: this.cantidad };
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    this.http.get<any>('http://192.168.1.247/insertar.php', { params: body }).subscribe(
+    this.http.get<any>('https://finanzify.sytes.net/insertar.php', { params: body }).subscribe(
       async (response) => {
-        console.log('Respuesta del servidor:', response);
         if (response && response.message === 'Registro insertado correctamente') {
           await this.obtenerMontos();
           this.presentAlert('Éxito', 'El registro se insertó correctamente.');

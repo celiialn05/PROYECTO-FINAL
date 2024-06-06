@@ -5,7 +5,7 @@ import { IonContent, IonicModule } from '@ionic/angular';
 import { RouterLink, RouterModule } from '@angular/router';
 import { moon, sunnyOutline } from 'ionicons/icons';
 import { ThemeService } from '../services/theme.service';
-import { IonButton, IonButtons, IonCol, IonFab, IonFabButton, IonFabList, IonFooter, IonGrid, IonHeader, IonItemDivider, IonRow, IonSpinner, IonTextarea, LoadingController } from '@ionic/angular/standalone';
+import { IonButton, IonButtons,IonToast, IonCol, IonFab, IonFabButton, IonFabList, IonFooter, IonGrid, IonHeader, IonItemDivider, IonRow, IonSpinner, IonTextarea, LoadingController } from '@ionic/angular/standalone';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { UserService } from '../services/UserService';
@@ -18,16 +18,21 @@ import { StorageService } from '../services/StorageService';
   styleUrls: ['./login.page.scss'],
   standalone: true, 
   //providers: [ThemeService, HttpClient, UserService, StorageService, LoadingController],
-  imports: [IonicModule, CommonModule, FormsModule, RouterModule,RouterLink]
+  //imports: [IonicModule, CommonModule, FormsModule, RouterModule,RouterLink]
                                                           //Para Android tendras que añadir estos imports (comando para hacer build: ionic capacitor build android )
-  //imports: [IonicModule, CommonModule, FormsModule, RouterModule,RouterLink,IonGrid,IonCol,IonRow,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList,IonSpinner],//,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList
+  imports: [IonicModule,IonToast,CommonModule, FormsModule, RouterModule,RouterLink,IonGrid,IonCol,IonRow,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList,IonSpinner],//,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList
 })
 export class LoginPage implements OnInit {
   dni: string = '';
   contrasena: string = '';
   error: boolean = false;
   isToastOpen = false;
-  constructor(private themeService: ThemeService,private http:HttpClient, private router: Router , private loadingCtrl: LoadingController, private UserService: UserService  ) {} 
+
+  constructor(private themeService: ThemeService,
+    private http:HttpClient,
+    private router: Router,
+    private loadingCtrl: LoadingController,
+    private UserService: UserService  ) {} 
  
   ngOnInit() {
   } 
@@ -51,7 +56,7 @@ export class LoginPage implements OnInit {
       contrasena: this.contrasena
     };
     
-    this.http.get<any>('http://192.168.1.247/login.php', { params: datos })
+    this.http.get<any>('https://finanzify.sytes.net/login.php', { params: datos })
       .subscribe(
         respuesta => {
           this.loadingCtrl.dismiss(); 
@@ -65,7 +70,6 @@ export class LoginPage implements OnInit {
            // this.StorageService.set('usuario', usuario);
 
             this.router.navigate(['/principal'], { state: { usuario } });
-            console.log('Usuario page principal:', usuario);
           //  console.log('Usuario page principal STORAGE:', this.UserService.getUsuario());
 
           } else {

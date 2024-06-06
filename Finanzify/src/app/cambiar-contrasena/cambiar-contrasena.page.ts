@@ -3,20 +3,17 @@ import { CommonModule, DOCUMENT } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import {IonicModule } from '@ionic/angular';
 import { RouterLink, RouterModule } from '@angular/router';
-import { moon, sunnyOutline } from 'ionicons/icons';
-import { ThemeService } from '../services/theme.service';
 import { IonButton, IonButtons, IonCol, IonFab, IonFabButton,AlertController,IonToolbar, IonFabList, IonFooter, IonGrid, IonHeader, IonItemDivider, IonCardHeader,IonRow, IonSpinner,IonTitle, IonCard,IonTextarea,IonCardTitle,IonBadge,IonContent,IonList,IonItem,IonInput,IonSelect, LoadingController } from '@ionic/angular/standalone';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { UserService } from '../services/UserService';
-import { StorageService } from '../services/StorageService';
 @Component({
   selector: 'app-cambiar-contrasena',
   templateUrl: './cambiar-contrasena.page.html',
   styleUrls: ['./cambiar-contrasena.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, RouterModule, RouterLink,  ReactiveFormsModule]
-  //imports: [IonicModule, CommonModule, FormsModule,IonGrid,IonCol,IonRow,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList,IonToolbar,IonTitle,IonContent,IonCard,IonCardHeader,IonCardTitle,IonBadge,IonList,IonItem,IonInput,IonSelect]
+  //imports: [IonicModule, CommonModule, FormsModule, RouterModule, RouterLink,  ReactiveFormsModule]
+  imports: [IonicModule, CommonModule, FormsModule,IonGrid,IonCol,IonRow,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList,IonToolbar,IonTitle,IonContent,IonCard,IonCardHeader,IonCardTitle,IonBadge,IonList,IonItem,IonInput,IonSelect]
 })
 export class CambiarContrasenaPage implements OnInit {
   nuevaContrasena!: string;
@@ -32,7 +29,6 @@ export class CambiarContrasenaPage implements OnInit {
 
   ngOnInit() {
     this.usuario = this.userService.getUsuario();
-    console.log('Usuario cambiar contrasena :', this.userService.getUsuario().dni);
   }
 
   async cambiarContrasena() {
@@ -58,10 +54,8 @@ export class CambiarContrasenaPage implements OnInit {
 /*
     Petición POST para cambiar la contraseña del usuario
 */
-    this.http.post('http://192.168.1.247/cambiar_contrasena.php', datos.toString(), httpOptions)
+    this.http.post('https://finanzify.sytes.net/cambiar_contrasena.php', datos.toString(), httpOptions)
         .subscribe(response => {
-            console.log(response);
-            console.log('Contraseña cambiada correctamente');
             this.router.navigate(['/login']);
         }, error => {
             console.error(error);

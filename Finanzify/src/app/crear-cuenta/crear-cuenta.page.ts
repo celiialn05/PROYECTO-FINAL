@@ -14,8 +14,8 @@ import { UserService } from '../services/UserService';
   templateUrl: './crear-cuenta.page.html',
   styleUrls: ['./crear-cuenta.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, RouterModule, RouterLink]
-  //imports: [IonicModule, CommonModule, FormsModule, IonButton, IonButtons, IonContent, IonFooter, IonHeader, IonTitle, IonToolbar, IonFabButton, IonItemDivider, IonTextarea, IonFab, IonFabList, IonCard, IonCardHeader, IonCardTitle, IonThumbnail, IonCol, IonGrid, IonRow, IonItem, IonLabel, IonInput]
+  //imports: [IonicModule, CommonModule, FormsModule, RouterModule, RouterLink]
+  imports: [IonicModule, CommonModule, FormsModule, IonButton, IonButtons, IonContent, IonFooter, IonHeader, IonTitle, IonToolbar, IonFabButton, IonItemDivider, IonTextarea, IonFab, IonFabList, IonCard, IonCardHeader, IonCardTitle, IonThumbnail, IonCol, IonGrid, IonRow, IonItem, IonLabel, IonInput]
 })
 
 export class CrearCuentaPage implements OnInit {
@@ -121,7 +121,7 @@ export class CrearCuentaPage implements OnInit {
     const defaultImageFile = new File([blob], 'default_image.png', { type: 'image/png' });
     formData.append('imagen', defaultImageFile);
 
-    this.http.post('http://192.168.1.247/crearcuentas.php', formData)
+    this.http.post('https://finanzify.sytes.net/crearcuentas.php', formData)
       .subscribe(response => {
         console.log(response);
         this.presentAlert('Éxito', 'Cuenta creada exitosamente.');

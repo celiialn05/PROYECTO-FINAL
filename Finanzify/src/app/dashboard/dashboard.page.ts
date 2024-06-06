@@ -22,9 +22,9 @@ import { UserService } from '../services/UserService';
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, VerticalBarChartComponent, NgClass, PieGridComponent, PieChartComponent, TreeMapChartComponent, NumberCardChartComponent, GaugeChartComponent, GroupedVerticalChartComponent],
+  //imports: [IonicModule, CommonModule, FormsModule, VerticalBarChartComponent, NgClass, PieGridComponent, PieChartComponent, TreeMapChartComponent, NumberCardChartComponent, GaugeChartComponent, GroupedVerticalChartComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  //imports: [IonicModule, CommonModule, FormsModule,VerticalBarChartComponent,NgClass,IonGrid,IonCol,IonRow,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList,IonToolbar,IonTitle,IonContent,IonCard,IonCardHeader,IonCardTitle,PieGridComponent,PieChartComponent,TreeMapChartComponent,NumberCardChartComponent,GaugeChartComponent,GroupedVerticalChartComponent]
+  imports: [IonicModule, CommonModule, FormsModule,VerticalBarChartComponent,NgClass,IonGrid,IonCol,IonRow,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList,IonToolbar,IonTitle,IonContent,IonCard,IonCardHeader,IonCardTitle,PieGridComponent,PieChartComponent,TreeMapChartComponent,NumberCardChartComponent,GaugeChartComponent,GroupedVerticalChartComponent]
 })
 export class DashboardPage implements OnInit {
 
@@ -107,7 +107,6 @@ export class DashboardPage implements OnInit {
   handleScreenSizeChange() {
     const width = this.platform.width();
     const height = this.platform.height();
-    console.log('Width:', width, 'Height:', height);
     if (width > height) {
       this.view = [0.679 * width, 0.379 * height];
     }
@@ -118,8 +117,6 @@ export class DashboardPage implements OnInit {
   
   /* Función para refrescar las gráficas */
   async actualizarGrafico() {
-    console.log('Mes seleccionado:', this.mesSeleccionado);
-    console.log('Año seleccionado:', this.anioSeleccionado);
     this.Estadistica_mes_actual();
     this.Estadistica_Anual();
     this.FormatearParaGauge();
@@ -132,11 +129,8 @@ export class DashboardPage implements OnInit {
 
     const body = { year: anio, month: mes, dni: this.userService.getUsuario().dni };
 
-    this.http.get<any>('http://192.168.1.247/estadisticas.php?query=estadistica1', { params: body }).subscribe(
+    this.http.get<any>('https://finanzify.sytes.net/estadisticas.php?query=estadistica1', { params: body }).subscribe(
       async (response) => {
-        console.log('Respuesta del servidor:', response);
-        console.log('dnipasado:', this.userService.getUsuario().dni);
-
         if (response != null && response.length > 0) {
           this.data = response;
           this.datos_salario_ahorros = this.filtrarDatos(response);
@@ -176,7 +170,7 @@ export class DashboardPage implements OnInit {
     const anio = this.anioSeleccionado;
     const dni = this.userService.getUsuario().dni;
 
-    const url = `http://192.168.1.247/estadisticas.php`;
+    const url = `https://finanzify.sytes.net/estadisticas.php`;
 
     const params = new HttpParams()
       .set('query', 'estadisticasanuales')
@@ -202,7 +196,6 @@ export class DashboardPage implements OnInit {
           });
 
           this.datos_anuales = data2;
-          console.log('Datos anuales:', this.datos_anuales);
           const totalGastos = response.reduce((total, item) => total + parseFloat(item.GASTOS), 0);
           const totalIngresosAhorros = response.reduce((total, item) => total + parseFloat(item.INGRESOS_AHORROS), 0);
           // Almacenar los totales en datos_ahorros_gastos
@@ -235,11 +228,8 @@ export class DashboardPage implements OnInit {
 
     const body = { year: anio, month: mes, dni: this.userService.getUsuario().dni };
 
-    this.http.get<any>('http://192.168.1.247/estadisticas.php?query=estadistica1', { params: body }).subscribe(
+    this.http.get<any>('https://finanzify.sytes.net/estadisticas.php?query=estadistica1', { params: body }).subscribe(
         async (response) => {
-            console.log('Respuesta del servidor (mes anterior):', response);
-            console.log('DNI pasado:', this.userService.getUsuario().dni);
-
             if (response != null && response.length > 0) {
                 this.data_mes_anterior = response;
                 this.datos_salario_ahorros_mes_anterior = this.filtrarDatos(response);
@@ -270,7 +260,7 @@ export class DashboardPage implements OnInit {
   async FormatearParaGauge() {
     const anio = this.anioSeleccionado;
     const dni = this.userService.getUsuario().dni;
-    const url = `http://192.168.1.247/estadisticas.php`;
+    const url = `https://finanzify.sytes.net/estadisticas.php`;
     const params = new HttpParams()
       .set('query', 'estadisticasanuales')
       .set('year', anio)
