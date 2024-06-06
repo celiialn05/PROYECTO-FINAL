@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule, DOCUMENT } from '@angular/common';
-import { FormBuilder, FormGroup, FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import {IonicModule } from '@ionic/angular';
 import { RouterLink, RouterModule } from '@angular/router';
 import { IonButton, IonButtons, IonCol, IonFab, IonFabButton,AlertController,IonToolbar, IonFabList, IonFooter, IonGrid, IonHeader, IonItemDivider, IonCardHeader,IonRow, IonSpinner,IonTitle, IonCard,IonTextarea,IonCardTitle,IonBadge,IonContent,IonList,IonItem,IonInput,IonSelect, LoadingController } from '@ionic/angular/standalone';
@@ -12,6 +12,7 @@ import { UserService } from '../services/UserService';
   templateUrl: './cambiar-contrasena.page.html',
   styleUrls: ['./cambiar-contrasena.page.scss'],
   standalone: true,
+   //imports: [IonicModule, CommonModule, FormsModule, RouterModule, RouterLink,  ReactiveFormsModule]
   imports: [IonicModule, CommonModule, FormsModule,IonGrid,IonCol,IonRow,IonHeader, IonFooter, IonButtons, IonButton, IonFabButton,IonItemDivider,IonTextarea,IonFabButton,IonFab,IonFabList,IonToolbar,IonTitle,IonContent,IonCard,IonCardHeader,IonCardTitle,IonBadge,IonList,IonItem,IonInput,IonSelect]
 })
 export class CambiarContrasenaPage implements OnInit {
